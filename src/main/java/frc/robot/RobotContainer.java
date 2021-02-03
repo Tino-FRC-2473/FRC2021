@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.TestMotorCommand;
 import frc.robot.subsystems.TestMotorSubsystem;
 
@@ -37,34 +38,23 @@ public class RobotContainer {
 	 * 
 	 */
 
-	private Joystick joystick1;
-	private Joystick joystick2;
+	// Tank Drive
+	private XboxController driver;
+	private Joystick leftJoystick;
+	private Joystick rightJoystick;
+	private JoystickButton buttonA;
+	private JoystickButton buttonB;
+	private JoystickButton buttonX;
+	private JoystickButton buttonY;
+
+	// Arcade Drive
 	private Joystick wheel;
 	private Joystick throttle;
 	private Joystick buttonPanel;
-	private JoystickButton buttonPanel2;
-	private JoystickButton buttonPanel4;
-	private JoystickButton buttonPanel6;
-
 	public RobotContainer() {
 		// Configure the button bindings
 		configureButtonBindings();
-	}
-
-	public Joystick getJoystick1() {
-		return joystick1;
-	}
-
-	public Joystick getJoystick2() {
-		return joystick2;
-	}
-
-	public Joystick getWheel() {
-		return wheel;
-	}
-
-	public Joystick getThrottle() {
-		return throttle;
+		driveSubsystem.setDefaultCommand(new TeleopTankDriveCommand(driveSubsystem));
 	}
 
 	/**
@@ -74,15 +64,19 @@ public class RobotContainer {
 	 * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
-		joystick1 = new Joystick(Constants.JOYSTICK_1_PORT);
-		joystick2 = new Joystick(Constants.JOYSTICK_2_PORT);
+		driver = new XboxController(Constants.XBOX_CONTROLLER_PORT);
+		// Tank Drive
+		leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
+		rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
+		buttonA = new JoystickButton(driver, Constants.BUTTON_A);
+		buttonB = new JoystickButton(driver, Constants.BUTTON_B);
+		buttonX = new JoystickButton(driver, Constants.BUTTON_X);
+		buttonY = new JoystickButton(driver, Constants.BUTTON_Y);
+
+		// Arcade Drive
 		wheel = new Joystick(Constants.WHEEL_PORT);
 		throttle = new Joystick(Constants.THROTTLE_PORT);
-
-		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
-		buttonPanel2 = new JoystickButton(buttonPanel, 2);
-		buttonPanel4 = new JoystickButton(buttonPanel, 4);
-		buttonPanel6 = new JoystickButton(buttonPanel, 6);
+		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT)
 	}
 
 	/**
@@ -97,19 +91,47 @@ public class RobotContainer {
 		// return testMotorEncoderCommand;
 	}
 
+	public XboxController getDriver() {
+		return driver;
+	}
+
+	public DriveSubsystem getDriveSystem() {
+		return driveSubsystem;
+	}
+
+	public Joystick getLeftJoystick() {
+		return leftJoystick;
+	}
+
+	public Joystick getRightJoystick() {
+		return rightJoystick;
+	}
+
+	public Joystick getWheel() {
+		return wheel;
+	}
+
+	public Joystick getThrottle() {
+		return throttle;
+	}
+
 	public Joystick getButtonPanel() {
 		return buttonPanel;
 	}
 
-	public JoystickButton getButtonPanel2() {
-		return buttonPanel2;
+	public JoystickButton getButtonA() {
+		return buttonA;
 	}
 
-	public JoystickButton getButtonPanel4() {
-		return buttonPanel4;
+	public JoystickButton getButtonB() {
+		return buttonB;
 	}
 
-	public JoystickButton getButtonPanel6() {
-		return buttonPanel6;
+	public JoystickButton getButtonX() {
+		return buttonX;
+	}
+
+	public JoystickButton getButtonY() {
+		return buttonY;
 	}
 }
