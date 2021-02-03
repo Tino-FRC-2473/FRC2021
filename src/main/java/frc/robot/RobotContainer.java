@@ -76,7 +76,7 @@ public class RobotContainer {
 		// Arcade Drive
 		wheel = new Joystick(Constants.WHEEL_PORT);
 		throttle = new Joystick(Constants.THROTTLE_PORT);
-		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT)
+		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
 	}
 
 	/**
