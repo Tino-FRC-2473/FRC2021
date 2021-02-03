@@ -35,8 +35,8 @@ public final class Constants {
 
 	public static final int WHEEL_PORT = 0;
     public static final int LEFT_JOYSTICK_PORT = 1;
-    public static final int BUTTON_PANEL_PORT = 2;
-	public static final int THROTTLE_PORT = 3;
+    public static final int THROTTLE_PORT = 2;
+    public static final int BUTTON_PANEL_PORT = 3;
     public static final int RIGHT_JOYSTICK_PORT = 4;
     
     public static final int XBOX_CONTROLLER_PORT = 0;
