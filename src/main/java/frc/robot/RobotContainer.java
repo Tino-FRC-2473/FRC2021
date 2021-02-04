@@ -54,7 +54,6 @@ public class RobotContainer {
 	public RobotContainer() {
 		// Configure the button bindings
 		configureButtonBindings();
-		driveSubsystem.setDefaultCommand(new TeleopTankDriveCommand(driveSubsystem));
 	}
 
 	/**
