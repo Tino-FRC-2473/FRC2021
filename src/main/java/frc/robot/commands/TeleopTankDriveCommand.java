@@ -11,7 +11,6 @@ public class TeleopTankDriveCommand extends CommandBase {
     public TeleopTankDriveCommand(DriveSubsystem subsystem) {
         driveSubsystem = subsystem;
         addRequirements(subsystem);
-
     }
 
     @Override
@@ -33,7 +32,4 @@ public class TeleopTankDriveCommand extends CommandBase {
     public boolean isFinished() {
         return false;
     }
-
-    
-
 }

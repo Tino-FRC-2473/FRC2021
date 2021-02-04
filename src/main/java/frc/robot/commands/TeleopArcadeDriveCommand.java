@@ -11,7 +11,6 @@ public class TeleopArcadeDriveCommand extends CommandBase {
     public TeleopArcadeDriveCommand(DriveSubsystem subsystem) {
         driveSubsystem = subsystem;
         addRequirements(subsystem);
-
     }
 
     @Override
