@@ -26,4 +26,8 @@ public class ShooterPrototypeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public double getSpeed() {
+    return shooter.get();
+  }
+
 }
