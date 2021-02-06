@@ -40,7 +40,7 @@ public class RunShooterToRPMCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(shooterSubsystem.getSpeed()) > power - 0.1;
   }
   
 }
