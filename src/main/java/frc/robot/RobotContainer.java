@@ -4,12 +4,12 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterPrototypeSubsystem;
 import frc.robot.commands.RunShooterToRPMCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.GamepadConstants;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * “declarative” paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -18,15 +18,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot’s subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final ShooterPrototypeSubsystem shooterTestSubsystem = new ShooterPrototypeSubsystem();
-  private XboxController gamepad = new XboxController(1);
-  private double shooterPower = 0.3;
-  private JoystickButton gamepadButtonA = new JoystickButton(gamepad, 1);
-  private JoystickButton gamepadButtonB = new JoystickButton(gamepad, 2);
-  private JoystickButton gamepadButtonX = new JoystickButton(gamepad, 3);
-  private JoystickButton gamepadButtonY = new JoystickButton(gamepad, 4);
+  private XboxController gamepad;
+  private JoystickButton gamepadButtonA;
+  private JoystickButton gamepadButtonB;
+  private JoystickButton gamepadButtonX;
+  private JoystickButton gamepadButtonY;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -39,16 +36,21 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // A - starts running the motor
-    // B - stop running the motor
-    // X - increase power by 0.1
-    // Y - decrease power by 0.1
-    gamepadButtonA.whenPressed(new RunShooterToRPMCommand(shooterTestSubsystem, shooterPower));
+
+    gamepad = new XboxController(GamepadConstants.XBOX_CONTROLLER_PORT);
+
+    gamepadButtonA = new JoystickButton(gamepad, GamepadConstants.BUTTON_A); // A - starts running the motor
+    gamepadButtonB = new JoystickButton(gamepad, GamepadConstants.BUTTON_B); // B - stop running the motor
+    gamepadButtonX = new JoystickButton(gamepad, GamepadConstants.BUTTON_X); // X - increase power by 0.1
+    gamepadButtonY = new JoystickButton(gamepad, GamepadConstants.BUTTON_Y); // Y - decrease power by 0.1
+
+    gamepadButtonA.whenPressed(new RunShooterToRPMCommand(shooterTestSubsystem, shooterTestSubsystem.getTargetPower()));
     gamepadButtonB.whenPressed(new RunShooterToRPMCommand(shooterTestSubsystem, 0));
     gamepadButtonX.whenPressed(
-      new RunShooterToRPMCommand(shooterTestSubsystem, ++shooterPower));
+      new RunShooterToRPMCommand(shooterTestSubsystem, shooterTestSubsystem.getTargetPower() + 0.1));
     gamepadButtonY.whenPressed(
-      new RunShooterToRPMCommand(shooterTestSubsystem, --shooterPower));
+      new RunShooterToRPMCommand(shooterTestSubsystem, shooterTestSubsystem.getTargetPower() - 0.1));
+    
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -57,6 +59,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }

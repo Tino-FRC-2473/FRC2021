@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class RunShooterToRPMCommand extends CommandBase {
   
   private final ShooterPrototypeSubsystem shooterSubsystem;
-  private double power;
 
   /**
    * Creates a new RunShooterToRPMCommand.
@@ -16,13 +15,13 @@ public class RunShooterToRPMCommand extends CommandBase {
    */
   public RunShooterToRPMCommand(ShooterPrototypeSubsystem subsystem, double power) {
     shooterSubsystem = subsystem;
-    this.power = power;
+    shooterSubsystem.setTargetPower(power);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      shooterSubsystem.runShooterPower(power);
+      shooterSubsystem.runShooterPower(shooterSubsystem.getTargetPower());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,7 +39,7 @@ public class RunShooterToRPMCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(shooterSubsystem.getSpeed()) > power - 0.1;
-  }
+    return Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01;
+  } 
   
 }
