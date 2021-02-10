@@ -133,4 +133,20 @@ public class RobotContainer {
 	public JoystickButton getButtonY() {
 		return buttonY;
 	}
+
+	public float getLeftY() {
+		return getLeftJoystick().getY();
+	}
+
+	public float getRightY() {
+		return getRightJoystick().getY();
+	}
+
+	public float getZ() {
+		return getThrottle().getZ();
+	}
+
+	public float getX() {
+		return getWheel().getX();
+	}
 }
