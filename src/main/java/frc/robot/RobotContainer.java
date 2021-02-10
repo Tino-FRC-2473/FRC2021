@@ -10,13 +10,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.TestMotorCommand;
-import frc.robot.subsystems.TestMotorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ServoSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -27,11 +24,9 @@ import frc.robot.subsystems.ServoSubsystem;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-	public final TestMotorSubsystem testMotorSubsystem = new TestMotorSubsystem();
-	public final TestMotorCommand testMotorCommand = new TestMotorCommand(testMotorSubsystem);
 
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	public final ServoSubsystem servoSubsystem = new ServoSubsystem();
+	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -86,8 +81,7 @@ public class RobotContainer {
 	public Command getAutonomousCommand() {
 		// An ExampleCommand will run in autonomous
 
-		return testMotorCommand;
-		// return testMotorEncoderCommand;
+		return null; // no auto command yet
 	}
 
 	public XboxController getDriver() {
@@ -134,19 +128,19 @@ public class RobotContainer {
 		return buttonY;
 	}
 
-	public float getLeftY() {
+	public double getLeftY() {
 		return getLeftJoystick().getY();
 	}
 
-	public float getRightY() {
+	public double getRightY() {
 		return getRightJoystick().getY();
 	}
 
-	public float getZ() {
+	public double getZ() {
 		return getThrottle().getZ();
 	}
 
-	public float getX() {
+	public double getX() {
 		return getWheel().getX();
 	}
 }
