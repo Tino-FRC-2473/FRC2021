@@ -15,7 +15,7 @@ public class TeleopTankDriveCommand extends CommandBase {
 
     @Override
     public void initialize() { 
-        
+        driveSubsystem.stopMotor();
     }
 
     @Override

@@ -15,7 +15,7 @@ public class TeleopArcadeDriveCommand extends CommandBase {
 
     @Override
     public void initialize() { 
-        
+        driveSubsystem.stopMotor();
     }
 
     @Override
