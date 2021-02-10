@@ -82,11 +82,18 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void arcadeDrive() {
-		differentialDrive.arcadeDrive(getZ(), -getX());
+		differentialDrive.arcadeDrive(Robot.robotContainer.getZ(), -Robot.robotContainer.getX());
 	}
 
 	public void stop() {
 		differentialDrive.stopMotor();
+	}
+
+	public void stopMotors() {
+		frontLeftMotor.set(0);
+		backLeftMotor.set(0);
+		frontRightMotor.set(0);
+		backRightMotor.set(0);
 	}
 
 	
