@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.StraightLineAuto;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -23,6 +24,7 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	private final Command autonomousCommand = new StraightLineAuto(driveSubsystem);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**
@@ -76,7 +78,7 @@ public class RobotContainer {
 	public Command getAutonomousCommand() {
 		// An ExampleCommand will run in autonomous
 
-		return null; // no auto command yet
+		return autonomousCommand; 
 	}
 
 	// public XboxController getDriver() {
