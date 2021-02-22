@@ -24,34 +24,34 @@ import edu.wpi.first.wpilibj.util.Units;
 */
 public final class Constants {
 
-public static final int TEST_PORT = 11;
-public static final double ENCODER_INCHES_TO_TICKS = 1;
+    public static final int TEST_PORT = 11;
+    public static final double ENCODER_INCHES_TO_TICKS = 1;
 
-public static final int SPARK_FRONT_LEFT_ID = 3;
-public static final int SPARK_BACK_LEFT_ID = 4;
-public static final int SPARK_FRONT_RIGHT_ID = 1;
-public static final int SPARK_BACK_RIGHT_ID = 2;
+    public static final int SPARK_FRONT_LEFT_ID = 3;
+    public static final int SPARK_BACK_LEFT_ID = 4;
+    public static final int SPARK_FRONT_RIGHT_ID = 1;
+    public static final int SPARK_BACK_RIGHT_ID = 2;
 
-public static final double DRIVE_P = 5e-4;
-public static final double DRIVE_I = 0;
-public static final double DRIVE_D = 0;
+    public static final double DRIVE_P = 5e-4;
+    public static final double DRIVE_I = 0;
+    public static final double DRIVE_D = 0;
 
-public static final double DRIVE_TICKS_PER_INCH = 1;
+    public static final double DRIVE_TICKS_PER_INCH = 1;
 
-public static final double DRIVE_WHEEL_CIRCUMFERENCE_INCHES = 23.8125;
-public static final double GEAR_RATIO = 10.1111;
-public static final double DRIVE_METERS_PER_ROTATION = Units.inchesToMeters(DRIVE_WHEEL_CIRCUMFERENCE_INCHES / GEAR_RATIO);
+    public static final double DRIVE_WHEEL_CIRCUMFERENCE_INCHES = 23.8125;
+    public static final double GEAR_RATIO = 10.1111;
+    public static final double DRIVE_METERS_PER_ROTATION = Units.inchesToMeters(DRIVE_WHEEL_CIRCUMFERENCE_INCHES / GEAR_RATIO);
 
-public static final int WHEEL_PORT = 0;
-public static final int LEFT_JOYSTICK_PORT = 1;
-public static final int RIGHT_JOYSTICK_PORT = 2;
-public static final int THROTTLE_PORT = 3;
-public static final int BUTTON_PANEL_PORT = 4;
-public static final int XBOX_CONTROLLER_PORT = 0;
-public static final int BUTTON_A = 1;
-public static final int BUTTON_B = 2;
-public static final int BUTTON_X = 3;
-public static final int BUTTON_Y = 4;
+    public static final int WHEEL_PORT = 0;
+    public static final int LEFT_JOYSTICK_PORT = 1;
+    public static final int RIGHT_JOYSTICK_PORT = 2;
+    public static final int THROTTLE_PORT = 3;
+    public static final int BUTTON_PANEL_PORT = 4;
+    public static final int XBOX_CONTROLLER_PORT = 0;
+    public static final int BUTTON_A = 1;
+    public static final int BUTTON_B = 2;
+    public static final int BUTTON_X = 3;
+    public static final int BUTTON_Y = 4;
 
-public static final int SERVO_PORT = 0;
+    public static final int SERVO_PORT = 0;
 }
