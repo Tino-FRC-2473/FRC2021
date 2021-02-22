@@ -28,7 +28,10 @@ public final class Constants {
     public static final double DRIVE_I = 0;
     public static final double DRIVE_D = 0;
 
-    public static final double DRIVE_TICKS_PER_INCH = 1;
+    public static final double COUNTS_PER_MOTOR_REVOLUTION = 42;
+    public static final double GEAR_RATIO = 10.1111;
+    public static final double WHEEL_RADIUS_INCHES = 4;
+    public static final double DRIVE_TICKS_PER_INCH = COUNTS_PER_MOTOR_REVOLUTION * GEAR_RATIO / (2 * Math.PI * WHEEL_RADIUS_INCHES);
 
 	public static final int WHEEL_PORT = 0;
     public static final int LEFT_JOYSTICK_PORT = 1;

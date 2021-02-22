@@ -7,6 +7,9 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -28,6 +31,8 @@ public class DriveSubsystem extends SubsystemBase {
 	SpeedControllerGroup rightSpeedControllerGroup; 
 	DifferentialDrive differentialDrive;
 
+	AHRS gyro;
+
 	public DriveSubsystem() {
 
 		frontLeftMotor = new CANSparkMax(Constants.SPARK_FRONT_LEFT_ID, MotorType.kBrushless);
@@ -39,7 +44,8 @@ public class DriveSubsystem extends SubsystemBase {
 		rightSpeedControllerGroup = new SpeedControllerGroup(frontRightMotor, backRightMotor);
 		
 		differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup); 
-		
+		gyro = new AHRS(SPI.Port.kMXP);
+
 		initPID();
 	}
 
@@ -57,6 +63,30 @@ public class DriveSubsystem extends SubsystemBase {
 
 		frontLeftMotor.getPIDController().setReference(leftTicks, ControlType.kPosition); 
 		frontRightMotor.getPIDController().setReference(rightTicks, ControlType.kPosition);
+	}
+
+	public boolean gyroDrive(double endPositionTick, double heading, double power) {
+		double error = heading - getHeading();
+        double position = getAverageEncoderDistance();
+		double adjustedLeftPower = power + Constants.DRIVE_P * error;
+		double adjustedRightPower = power - Constants.DRIVE_P * error;
+		double distanceToTarget = Math.abs(endPositionTick - position) / Constants.ENCODER_INCHES_TO_TICKS;
+		//the scalar slows down the robot as it gets closer to the goal,
+		//while ensuring that it doesn't slow the robot down too much (keeps scalar between 1 and 0.1)
+		double scalar = Math.min(1, Math.max(Math.atan(distanceToTarget / 4) * 2 / Math.PI, 0.1));
+		//checks whether the robot has arrived at its destination
+		if ((power > 0 && position < endPositionTick) || (power < 0 && position > endPositionTick)) {
+        	powerDrive(adjustedLeftPower * scalar, adjustedRightPower * scalar);
+			//returns that it has not arrived at its destination
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	public void gyroTurn(double targetAngleDeg) {
+		double error = targetAngleDeg - getHeading();
+		differentialDrive.tankDrive(error * Constants.DRIVE_P, error * Constants.DRIVE_P);
 	}
 
 	private void setPID(CANSparkMax motor, double P, double I, double D) {
@@ -92,7 +122,13 @@ public class DriveSubsystem extends SubsystemBase {
 		frontRightMotor.set(0);
 		backRightMotor.set(0);
 	}
+	public double getHeading() {
+		return -Math.IEEEremainder(gyro.getAngle(), 360);
+	}
 
+	public double getAverageEncoderDistance() {
+		return (frontLeftMotor.getEncoder().getPosition() + frontRightMotor.getEncoder().getPosition()) / 2.0;
+	}
 	
 
 	@Override
