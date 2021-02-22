@@ -10,6 +10,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.util.Units;
 
 /**
@@ -31,6 +32,24 @@ public static final int SPARK_FRONT_LEFT_ID = 3;
 public static final int SPARK_BACK_LEFT_ID = 4;
 public static final int SPARK_FRONT_RIGHT_ID = 1;
 public static final int SPARK_BACK_RIGHT_ID = 2;
+
+// units: meters 
+public static final double kSDrive = 0.183;
+public static final double kVDrive = 0.56;
+public static final double kADrive = 0.0837;
+public static final double kPDrive = 3.85;
+
+// placeholder trackwidth, need to update with empirical trackwidth after drive characterization
+public static final double kTrackwidthMeters = 0.75;
+public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
+
+// units: m/s and m/s^2
+public static final double kMaxSpeed = 3;
+public static final double kMaxAcceleration = 3;
+
+// units: meters & seconds
+public static final double kRamseteB = 2;
+public static final double kRamseteZeta = 0.7;
 
 public static final double DRIVE_P = 5e-4;
 public static final double DRIVE_I = 0;
