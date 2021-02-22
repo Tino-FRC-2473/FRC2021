@@ -4,11 +4,24 @@
 
 package frc.robot;
 
+import java.util.List;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
@@ -87,9 +100,79 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand() {
-		// An ExampleCommand will run in autonomous
+		// create a voltage constraint to ensure we don't accelerate too fast
+		// set maximum voltage to 10V rather than 12V to allow for voltage sag during operation
+		DifferentialDriveVoltageConstraint autoVoltageConstraint = 
+			new DifferentialDriveVoltageConstraint(
+				new SimpleMotorFeedforward(Constants.K_S_DRIVE, Constants.K_V_DRIVE, Constants.K_A_DRIVE),
+			Constants.K_DRIVE_KINEMATICS,
+			10);
 
-		return autonomousCommand; 
+		// create configuration for trajectory
+		TrajectoryConfig config = 
+			new TrajectoryConfig(Constants.K_MAX_SPEED, 
+								 Constants.K_MAX_ACCEL)
+								 // add kinematics to ensure max speed is obeyed
+								 .setKinematics(Constants.K_DRIVE_KINEMATICS)
+								 // apply voltage constraint
+								 .addConstraint(autoVoltageConstraint);
+
+		Pose2d initialPoseB1 = new Pose2d(Units.feetToMeters(2.5), Units.feetToMeters(10), new Rotation2d(0));	
+		
+		Translation2d B3 = new Translation2d(Units.feetToMeters(7.5), Units.feetToMeters(10));
+
+		Translation2d D5 = new Translation2d(Units.feetToMeters(12.5), Units.feetToMeters(5));
+
+		Translation2d B7 = new Translation2d(Units.feetToMeters(17.5), Units.feetToMeters(10));
+
+		Pose2d testPoseD5 = new Pose2d(Units.feetToMeters(12.5), Units.feetToMeters(5), new Rotation2d(0));
+		
+		Pose2d endPoseB11 = new Pose2d(Units.feetToMeters(27), Units.feetToMeters(10), new Rotation2d(0));
+		
+		// Trajectory traj1 = TrajectoryGenerator.generateTrajectory(
+		// 	// starting position of robot
+		// 	initialPoseB1,
+		// 	// pass through these waypoints to intake power cells
+		// 	List.of(B3, D5, B7),
+		// 	// end at this position 
+		// 	endPoseB11,
+		// 	// pass config
+		// 	config
+		// );
+
+		// trajectory for testing:
+		Trajectory trajTest = TrajectoryGenerator.generateTrajectory(
+			// starting position of robot
+			initialPoseB1,
+			// pass through these waypoints to intake power cells
+			List.of(B3),
+			// end at this position 
+			testPoseD5,
+			// pass config
+			config
+		);
+
+		RamseteCommand ramseteCommand = new RamseteCommand( 
+			trajTest,
+			driveSubsystem::getPose,
+			new RamseteController(Constants.K_RAMSETE_B, Constants.K_RAMSETE_ZETA),
+			new SimpleMotorFeedforward(Constants.K_S_DRIVE, 
+									   Constants.K_V_DRIVE, 
+									   Constants.K_A_DRIVE),
+			Constants.K_DRIVE_KINEMATICS,
+			driveSubsystem::getWheelSpeeds,
+			new PIDController(Constants.K_P_DRIVE, 0, 0),
+			new PIDController(Constants.K_P_DRIVE, 0, 0),
+			// RamseteCommand passes volts to the callback
+			driveSubsystem::tankDriveVolts,
+			driveSubsystem
+		);
+
+		// reset odometry to starting pose of trajectory
+		driveSubsystem.resetOdometry(trajTest.getInitialPose());
+
+		// run path following, then stop
+		return ramseteCommand.andThen(()-> driveSubsystem.tankDriveVolts(0, 0));
 	}
 
 	// public XboxController getDriver() {

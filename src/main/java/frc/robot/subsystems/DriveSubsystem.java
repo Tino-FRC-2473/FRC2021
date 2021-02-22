@@ -16,6 +16,10 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 
 public class DriveSubsystem extends SubsystemBase {
 	/**
@@ -32,6 +36,8 @@ public class DriveSubsystem extends SubsystemBase {
 	DifferentialDrive differentialDrive;
 
 	AHRS gyro;
+
+	DifferentialDriveOdometry odometry;
 
 	public DriveSubsystem() {
 
@@ -54,6 +60,10 @@ public class DriveSubsystem extends SubsystemBase {
         gyro.zeroYaw();
         System.out.println(gyro.getAngle());
 
+        odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()),
+                new Pose2d(0, 0, new Rotation2d(0)));
+
+        setMaxOutput(0.75);
 		initPID();
 	}
 
@@ -148,14 +158,62 @@ public class DriveSubsystem extends SubsystemBase {
 		return (-frontLeftMotor.getEncoder().getPosition() + frontRightMotor.getEncoder().getPosition()) / 2.0;
 	}
 
+	public void resetEncoders() {
+        frontLeftMotor.getEncoder().setPosition(0);
+        frontRightMotor.getEncoder().setPosition(0);
+    }
+
     public void resetGyro() {
         gyro.reset();
         gyro.zeroYaw();
+    }
+
+    public void resetOdometry(Pose2d pose) {
+        resetEncoders();
+        odometry.resetPosition(pose, gyro.getRotation2d());
+    }
+
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+        double leftRate = -frontLeftMotor.getEncoder().getVelocity() * Constants.DRIVE_METERS_PER_ROTATION / 60.0;
+        double rightRate = frontRightMotor.getEncoder().getVelocity() * Constants.DRIVE_METERS_PER_ROTATION / 60.0;
+        return new DifferentialDriveWheelSpeeds(leftRate, rightRate);
+    }
+
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        frontLeftMotor.setVoltage(leftVolts);
+        backLeftMotor.setVoltage(leftVolts);
+        frontRightMotor.setVoltage(-rightVolts);
+        backRightMotor.setVoltage(-rightVolts);
+        differentialDrive.feed();
+    }
+
+    public Pose2d getPose() {
+        return odometry.getPoseMeters();
+    }
+
+    public double getLeftEncoderPosition() {
+        return frontLeftMotor.getEncoder().getPosition();
+    }
+
+    public double getRightEncoderPosition() {
+        return frontRightMotor.getEncoder().getPosition();
+    }
+
+    public void setMaxOutput(double maxOutput) {
+        differentialDrive.setMaxOutput(maxOutput);
+    }
+
+    public double getTurnRate() {
+        // gyro defines clockwise as positive, when standard convention describes
+        // clockwise as negative
+        return -gyro.getRate();
     }
 
 	@Override
 	public void periodic() {
 
 		// This method will be called once per scheduler run
+		odometry.update(gyro.getRotation2d(), frontLeftMotor.getEncoder().getPosition(),
+                frontRightMotor.getEncoder().getPosition());
 	}
 }
