@@ -10,11 +10,18 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+// Commands
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.EnableShooterCommand;
+
+// Subsystems
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeStorageSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,8 +32,10 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  
+  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, true);
 	private final Command autonomousCommand = 
 		new SequentialCommandGroup (
 			new StraightDrive(driveSubsystem, 120, 0.3),
@@ -79,6 +88,10 @@ public class RobotContainer {
 		wheel = new Joystick(Constants.WHEEL_PORT);
 		throttle = new Joystick(Constants.THROTTLE_PORT);
 		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
+	}
+
+	public EnableShooterCommand getEnableShooterCommand() {
+		return enableShooterCommand;
 	}
 
 	/**
