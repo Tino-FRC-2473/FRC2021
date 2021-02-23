@@ -32,8 +32,7 @@ public class RobotContainer {
 
 	// Tank Drive
 	private XboxController driver;
-	private Joystick leftJoystick;
-	private Joystick rightJoystick;
+	private Joystick joystick;
 	private JoystickButton buttonA;
 	private JoystickButton buttonB;
 	private JoystickButton buttonX;
@@ -125,11 +124,11 @@ public class RobotContainer {
 	}
 
 	public double getLeftY() {
-		return XboxController.getY(GenericHID.Hand.kLeft);
+		return driver.getY(GenericHID.Hand.kLeft);
 	}
 
 	public double getRightX() {
-		return XboxController.getX(GenericHID.Hand.kRight);
+		return driver.getX(GenericHID.Hand.kRight);
 	}
 
 	public double getRightY() {
