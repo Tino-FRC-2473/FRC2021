@@ -87,13 +87,13 @@ public class RobotContainer {
 	// 	return driveSubsystem;
 	// }
 
-	public Joystick getLeftJoystick() {
-		return leftJoystick;
-	}
+	// public Joystick getLeftJoystick() {
+	// 	return leftJoystick;
+	// }
 
-	public Joystick getRightJoystick() {
-		return rightJoystick;
-	}
+	// public Joystick getRightJoystick() {
+	// 	return rightJoystick;
+	// }
 
 	public Joystick getWheel() {
 		return wheel;
@@ -132,7 +132,7 @@ public class RobotContainer {
 	}
 
 	public double getRightY() {
-		return XboxController.getY(GenericHID.Hand.kRight);
+		return driver.getY(GenericHID.Hand.kRight);
 	}
 
 	public double getZ() {
