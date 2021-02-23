@@ -1,9 +1,6 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
 
@@ -60,8 +57,7 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 		driver = new XboxController(Constants.XBOX_CONTROLLER_PORT);
 		// Tank Drive
-		leftJoystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
-		rightJoystick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
+		joystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
 		buttonA = new JoystickButton(driver, Constants.BUTTON_A);
 		buttonB = new JoystickButton(driver, Constants.BUTTON_B);
 		buttonX = new JoystickButton(driver, Constants.BUTTON_X);
@@ -84,13 +80,13 @@ public class RobotContainer {
 		return null; // no auto command yet
 	}
 
-	public XboxController getDriver() {
-		return driver;
-	}
+	// public XboxController getDriver() {
+	// 	return driver;
+	// }
 
-	public DriveSubsystem getDriveSystem() {
-		return driveSubsystem;
-	}
+	// public DriveSubsystem getDriveSystem() {
+	// 	return driveSubsystem;
+	// }
 
 	public Joystick getLeftJoystick() {
 		return leftJoystick;
@@ -129,11 +125,15 @@ public class RobotContainer {
 	}
 
 	public double getLeftY() {
-		return getLeftJoystick().getY();
+		return XboxController.getY(GenericHID.Hand.kLeft);
+	}
+
+	public double getRightX() {
+		return XboxController.getX(GenericHID.Hand.kRight);
 	}
 
 	public double getRightY() {
-		return getRightJoystick().getY();
+		return XboxController.getY(GenericHID.Hand.kRight);
 	}
 
 	public double getZ() {
