@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.EnableShooterCommand;
 import frc.robot.subsystems.*;
 
 /**
@@ -19,7 +18,6 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, true);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -34,10 +32,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {}
-
-  public EnableShooterCommand getEnableShooterCommand() {
-		return enableShooterCommand;
-	}
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

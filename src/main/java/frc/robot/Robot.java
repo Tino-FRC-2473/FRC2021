@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
-  private Command enableShooterCommand;
 
   private RobotContainer robotContainer;
 
@@ -79,11 +78,6 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
-    }
-
-    enableShooterCommand = robotContainer.getEnableShooterCommand();
-    if (enableShooterCommand != null) {
-      enableShooterCommand.schedule();
     }
     
   }
