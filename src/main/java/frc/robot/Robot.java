@@ -82,6 +82,7 @@ public class Robot extends TimedRobot {
     }
 
     enableShooterCommand = robotContainer.getEnableShooterCommand();
+    
     if (enableShooterCommand != null) {
       enableShooterCommand.schedule();
     }
