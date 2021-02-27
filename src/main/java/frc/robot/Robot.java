@@ -63,9 +63,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     autonomousCommand = robotContainer.getAutonomousCommand();
 
-    intakeStorageSubsystem.deployIntake(0.5);
-    intakeStorageSubsystem.runStorageMotor(0.5);
-
     // schedule the autonomous command (example)
     if (autonomousCommand != null) {
       autonomousCommand.schedule();
