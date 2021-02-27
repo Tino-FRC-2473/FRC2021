@@ -29,6 +29,14 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 
 		intakePistons = new DoubleSolenoid(IntakeStorageConstants.INTAKE_PISTON_FORWARD_PORT, IntakeStorageConstants.INTAKE_PISTON_REVERSE_PORT);
 	
+
+		
+		intakeMotor.set(0);
+		storageMotor.set(0);
+
+		intakePistons.set(Value.kOff);
+
+
 	}
 
 	public void runIntakeMotor(double power) {
