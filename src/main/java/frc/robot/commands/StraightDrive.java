@@ -23,12 +23,12 @@ public class StraightDrive extends CommandBase {
 
     @Override
     public void initialize() { 
-        driveSubsystem.stopMotors();
+        //driveSubsystem.stopMotors();
     }
 
     @Override
     public void execute() {
-        System.out.println("Within the StraightDrive execute method");
+        System.out.println("Heading: " + heading + "  endPosition: " + endPosition);
         isFinished = !driveSubsystem.gyroDrive(endPosition, heading, power);  
     }
 
