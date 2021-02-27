@@ -19,7 +19,8 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, true);
+  private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
+  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, true);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
