@@ -28,11 +28,8 @@ public class StraightDrive extends CommandBase {
 
     @Override
     public void execute() {
-        if(driveSubsystem.gyroDrive(endPosition, heading, power)) {
-            isFinished = false;
-        }else {
-            isFinished = true;
-        }   
+        System.out.println("Within the StraightDrive execute method");
+        isFinished = !driveSubsystem.gyroDrive(endPosition, heading, power);  
     }
 
     @Override
