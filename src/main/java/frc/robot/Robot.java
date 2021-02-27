@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
 		// Instantiate our RobotContainer. This will perform all our button bindings,
 		// and put our
 		// autonomous chooser on the dashboard.
+		System.out.println("Created the Robot Container");
 		robotContainer = new RobotContainer();
 
 	}
@@ -79,6 +80,7 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.schedule();
+			System.out.println("Command has been scheduled");
 		}
 	}
 
