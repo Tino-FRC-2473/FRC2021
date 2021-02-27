@@ -29,7 +29,7 @@ public class StraightDrive extends CommandBase {
     @Override
     public void execute() {
         System.out.println("Heading: " + heading + "  endPosition: " + endPosition);
-        isFinished = !driveSubsystem.gyroDrive(endPosition, heading, power);  
+        isFinished = driveSubsystem.gyroDrive(endPosition, heading, power);  
     }
 
     @Override

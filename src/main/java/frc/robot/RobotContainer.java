@@ -29,11 +29,11 @@ public class RobotContainer {
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	private final Command autonomousCommand = 
 		new SequentialCommandGroup (
-			new StraightDrive(driveSubsystem, 170, 0.4),
+			new StraightDrive(driveSubsystem, 170, 0.3),
 			new TurnUsingGyro(driveSubsystem, 45),
-			new StraightDrive(driveSubsystem, 84.9, 0.4),
+			new StraightDrive(driveSubsystem, 84.9, 0.3),
 			new TurnUsingGyro(driveSubsystem, 0),
-			new StraightDrive(driveSubsystem, 36, 0.4)
+			new StraightDrive(driveSubsystem, 36, 0.3)
 		);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
