@@ -94,18 +94,18 @@ public class RobotContainer {
 	public Command getAutonomousCommand() {
 		// create a voltage constraint to ensure we don't accelerate too fast
 		// set maximum voltage to 10V rather than 12V to allow for voltage sag during operation
-		var autoVoltageConstraint = 
+		DifferentialDriveVoltageConstraint autoVoltageConstraint = 
 			new DifferentialDriveVoltageConstraint(
-				new SimpleMotorFeedforward(Constants.kSDrive, Constants.kVDrive, Constants.kADrive),
-			Constants.kDriveKinematics,
+				new SimpleMotorFeedforward(Constants.K_S_DRIVE, Constants.K_V_DRIVE, Constants.K_A_DRIVE),
+			Constants.K_DRIVE_KINEMATICS,
 			10);
 
 		// create configuration for trajectory
 		TrajectoryConfig config = 
-			new TrajectoryConfig(Constants.kMaxSpeed, 
-								 Constants.kMaxAcceleration)
+			new TrajectoryConfig(Constants.K_MAX_SPEED, 
+								 Constants.K_MAX_ACCEL)
 								 // add kinematics to ensure max speed is obeyed
-								 .setKinematics(Constants.kDriveKinematics)
+								 .setKinematics(Constants.K_DRIVE_KINEMATICS)
 								 // apply voltage constraint
 								 .addConstraint(autoVoltageConstraint);
 
@@ -133,14 +133,14 @@ public class RobotContainer {
 		RamseteCommand ramseteCommand = new RamseteCommand( 
 			traj1,
 			driveSubsystem::getPose,
-			new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-			new SimpleMotorFeedforward(Constants.kSDrive, 
-									   Constants.kVDrive, 
-									   Constants.kADrive),
-			Constants.kDriveKinematics,
+			new RamseteController(Constants.K_RAMSETE_B, Constants.K_RAMSETE_ZETA),
+			new SimpleMotorFeedforward(Constants.K_S_DRIVE, 
+									   Constants.K_V_DRIVE, 
+									   Constants.K_A_DRIVE),
+			Constants.K_DRIVE_KINEMATICS,
 			driveSubsystem::getWheelSpeeds,
-			new PIDController(Constants.kPDrive, 0, 0),
-			new PIDController(Constants.kPDrive, 0, 0),
+			new PIDController(Constants.K_P_DRIVE, 0, 0),
+			new PIDController(Constants.K_P_DRIVE, 0, 0),
 			// RamseteCommand passes volts to the callback
 			driveSubsystem::tankDriveVolts,
 			driveSubsystem

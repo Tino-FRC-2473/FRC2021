@@ -34,31 +34,33 @@ public static final int SPARK_FRONT_RIGHT_ID = 1;
 public static final int SPARK_BACK_RIGHT_ID = 2;
 
 // units: meters 
-public static final double kSDrive = 0.183;
-public static final double kVDrive = 0.56;
-public static final double kADrive = 0.0837;
-public static final double kPDrive = 3.85;
+public static final double K_S_DRIVE = 0.183;
+public static final double K_V_DRIVE = 0.56;
+public static final double K_A_DRIVE = 0.0837;
+public static final double K_P_DRIVE = 3.85;
 
 // placeholder trackwidth, need to update with empirical trackwidth after drive characterization
-public static final double kTrackwidthMeters = 0.75;
-public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
+public static final double K_TRACKWIDTH_METERS = 0.75;
+public static final DifferentialDriveKinematics K_DRIVE_KINEMATICS = new DifferentialDriveKinematics(K_TRACKWIDTH_METERS);
 
 // units: m/s and m/s^2
-public static final double kMaxSpeed = 3;
-public static final double kMaxAcceleration = 3;
+public static final double K_MAX_SPEED = 3;
+public static final double K_MAX_ACCEL = 3;
 
 // units: meters & seconds
-public static final double kRamseteB = 2;
-public static final double kRamseteZeta = 0.7;
+public static final double K_RAMSETE_B = 2;
+public static final double K_RAMSETE_ZETA = 0.7;
 
 public static final double DRIVE_P = 5e-4;
 public static final double DRIVE_I = 0;
 public static final double DRIVE_D = 0;
 
-public static final double DRIVE_TICKS_PER_INCH = 1;
+public static final double COUNTS_PER_MOTOR_REVOLUTION = 42;
+public static final double GEAR_RATIO = 10.1111;
+public static final double WHEEL_RADIUS_INCHES = 4;
+public static final double DRIVE_TICKS_PER_INCH = COUNTS_PER_MOTOR_REVOLUTION * GEAR_RATIO / (2 * Math.PI * WHEEL_RADIUS_INCHES);
 
 public static final double DRIVE_WHEEL_CIRCUMFERENCE_INCHES = 23.8125;
-public static final double GEAR_RATIO = 10.1111;
 public static final double DRIVE_METERS_PER_ROTATION = Units.inchesToMeters(DRIVE_WHEEL_CIRCUMFERENCE_INCHES / GEAR_RATIO);
 
 public static final int WHEEL_PORT = 0;

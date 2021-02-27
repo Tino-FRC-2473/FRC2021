@@ -54,6 +54,8 @@ public class DriveSubsystem extends SubsystemBase {
         gyro = new AHRS(SPI.Port.kMXP);
         odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()),
                 new Pose2d(0, 0, new Rotation2d(0)));
+
+        setMaxOutput(1.0);
         initPID();
     }
 
