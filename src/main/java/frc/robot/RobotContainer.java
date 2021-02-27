@@ -33,9 +33,10 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
   
-  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, true);
+  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, true);
 	private final Command autonomousCommand = 
 		new SequentialCommandGroup (
 			new StraightDrive(driveSubsystem, 120, 0.3),
