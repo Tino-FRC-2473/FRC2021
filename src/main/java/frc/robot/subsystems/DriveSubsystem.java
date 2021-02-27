@@ -79,7 +79,7 @@ public class DriveSubsystem extends SubsystemBase {
 		double scalar = 1; //Math.min(1, Math.max(Math.atan(distanceToTarget / 4) * 2 / Math.PI, 0.1));
 		//checks whether the robot has arrived at its destination
 		if ((power > 0 && position < endPositionTick) || (power < 0 && position > endPositionTick)) {
-        	powerDrive(adjustedLeftPower * scalar, -adjustedRightPower * scalar);
+        	powerDrive(-adjustedLeftPower * scalar, adjustedRightPower * scalar);
 			//returns that it has not arrived at its destination
 			return false;
 		}else {
