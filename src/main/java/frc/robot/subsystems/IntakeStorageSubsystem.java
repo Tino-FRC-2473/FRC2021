@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeStorageConstants;
 
 public class IntakeStorageSubsystem extends SubsystemBase {
-
 	private CANSparkMax intakeMotor;
 	private CANSparkMax storageMotor;
 
