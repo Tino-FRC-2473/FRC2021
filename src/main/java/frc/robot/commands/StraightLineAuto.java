@@ -32,11 +32,11 @@ public class StraightLineAuto extends CommandBase {
         //and not the entire 120 inches that the challenge requires
 
         new SequentialCommandGroup (
-            new StraightDrive(driveSubsystem, 170, 0.8),
-            new TurnUsingGyro(driveSubsystem, 45, 2),
-            new StraightDrive(driveSubsystem, 84.9, 0.8),
-            new TurnUsingGyro(driveSubsystem, 0, 2),
-            new StraightDrive(driveSubsystem, 36, 0.8)
+            new StraightDrive(driveSubsystem, 170, 0.4),
+            new TurnUsingGyro(driveSubsystem, 45),
+            new StraightDrive(driveSubsystem, 84.9, 0.4),
+            new TurnUsingGyro(driveSubsystem, 0),
+            new StraightDrive(driveSubsystem, 36, 0.4)
         );
         isFinished = true;
     }
@@ -48,6 +48,6 @@ public class StraightLineAuto extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return isFinished;
+        return this.isFinished;
     }
 }

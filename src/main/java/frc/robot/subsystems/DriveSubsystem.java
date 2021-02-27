@@ -45,6 +45,8 @@ public class DriveSubsystem extends SubsystemBase {
 		
 		differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup); 
 		gyro = new AHRS(SPI.Port.kMXP);
+        gyro.calibrate();
+        gyro.reset();
 
 		initPID();
 	}

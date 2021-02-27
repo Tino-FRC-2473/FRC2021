@@ -7,14 +7,13 @@ public class TurnUsingGyro extends CommandBase {
 
     DriveSubsystem driveSubsystem;
     private double targetAngleDeg;
-    private double accuracy;
+    private double accuracy = 2.0;
     private boolean isFinished = false;
 
 
-    public TurnUsingGyro(DriveSubsystem subsystem, double targetAngleDeg, double accuracy) {
+    public TurnUsingGyro(DriveSubsystem subsystem, double targetAngleDeg) {
         driveSubsystem = subsystem;
         this.targetAngleDeg = targetAngleDeg;
-        this.accuracy = accuracy;
         addRequirements(subsystem);
     }
 
