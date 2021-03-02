@@ -29,7 +29,7 @@ public final class Constants {
     public static final double DRIVE_D = 0;
 
     public static final double COUNTS_PER_MOTOR_REVOLUTION = 42;
-    public static final double GEAR_RATIO = 26.0 / 12.0;
+    public static final double GEAR_RATIO = 26.0 * 4.67 / 12.0;
     public static final double WHEEL_DIAMETER_INCHES = 7.65;
     public static final double DRIVE_TICKS_PER_INCH = COUNTS_PER_MOTOR_REVOLUTION * GEAR_RATIO / (Math.PI * WHEEL_DIAMETER_INCHES);
 
