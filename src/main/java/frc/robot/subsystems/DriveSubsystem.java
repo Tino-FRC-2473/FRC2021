@@ -38,7 +38,12 @@ public class DriveSubsystem extends SubsystemBase {
 		frontLeftMotor = new CANSparkMax(Constants.SPARK_FRONT_LEFT_ID, MotorType.kBrushless);
 		backLeftMotor = new CANSparkMax(Constants.SPARK_BACK_LEFT_ID, MotorType.kBrushless);
 		frontRightMotor = new CANSparkMax(Constants.SPARK_FRONT_RIGHT_ID, MotorType.kBrushless);  
-		backRightMotor = new CANSparkMax(Constants.SPARK_BACK_RIGHT_ID, MotorType.kBrushless);  
+		backRightMotor = new CANSparkMax(Constants.SPARK_BACK_RIGHT_ID, MotorType.kBrushless); 
+        
+        frontLeftMotor.getEncoder().setPosition(0);
+        backLeftMotor.getEncoder().setPosition(0);
+        frontRightMotor.getEncoder().setPosition(0);
+        frontLeftMotor.getEncoder().setPosition(0);
 
 		leftSpeedControllerGroup = new SpeedControllerGroup(frontLeftMotor, backLeftMotor); 
 		rightSpeedControllerGroup = new SpeedControllerGroup(frontRightMotor, backRightMotor);
@@ -133,14 +138,6 @@ public class DriveSubsystem extends SubsystemBase {
 	public double getAverageEncoderDistance() {
 		return (-frontLeftMotor.getEncoder().getPosition() + frontRightMotor.getEncoder().getPosition()) / 2.0;
 	}
-
-    public void resetEncoders() {
-        frontLeftMotor.getEncoder().setPosition(0);
-        frontRightMotor.getEncoder().setPosition(0);
-        backLeftMotor.getEncoder().setPosition(0);
-        backRightMotor.getEncoder().setPosition(0);
-    }
-	
 
 	@Override
 	public void periodic() {
