@@ -69,7 +69,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public boolean gyroDrive(double endPositionTick, double heading, double power) {
 		double error = heading - getHeading();
-        double position = getAverageEncoderDistance();
+        double position = getAverageEncoderDistance() * Constants.COUNTS_PER_MOTOR_REVOLUTION;
 		double adjustedLeftPower = power + Constants.DRIVE_P * error;
 		double adjustedRightPower = power - Constants.DRIVE_P * error;
 		double distanceToTarget = Math.abs(endPositionTick - position) / Constants.ENCODER_INCHES_TO_TICKS;
@@ -83,6 +83,7 @@ public class DriveSubsystem extends SubsystemBase {
 			//returns that it has not arrived at its destination
 			return false;
 		}else {
+            powerDrive(0, 0);
 			return true;
 		}
 	}
@@ -130,8 +131,15 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public double getAverageEncoderDistance() {
-		return (frontLeftMotor.getEncoder().getPosition() + frontRightMotor.getEncoder().getPosition()) / 2.0;
+		return (-frontLeftMotor.getEncoder().getPosition() + frontRightMotor.getEncoder().getPosition()) / 2.0;
 	}
+
+    public void resetEncoders() {
+        frontLeftMotor.getEncoder().setPosition(0);
+        frontRightMotor.getEncoder().setPosition(0);
+        backLeftMotor.getEncoder().setPosition(0);
+        backRightMotor.getEncoder().setPosition(0);
+    }
 	
 
 	@Override
