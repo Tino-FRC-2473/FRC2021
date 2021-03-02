@@ -34,7 +34,7 @@ public class StraightLineAuto extends CommandBase {
         System.out.println("StraightLineAuto command - starting execution");
 
         new SequentialCommandGroup (
-            new StraightDrive(driveSubsystem, 170, 0.6),
+            new StraightDrive(driveSubsystem, 180, 0.6),
             new TurnUsingGyro(driveSubsystem, 45),
             new StraightDrive(driveSubsystem, 84.9, 0.6),
             new TurnUsingGyro(driveSubsystem, 0),

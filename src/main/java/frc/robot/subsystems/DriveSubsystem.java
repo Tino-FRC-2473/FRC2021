@@ -75,8 +75,8 @@ public class DriveSubsystem extends SubsystemBase {
 	public boolean gyroDrive(double endPositionTick, double heading, double power) {
 		double error = heading - getHeading();
         double position = getAverageEncoderDistance() * Constants.COUNTS_PER_MOTOR_REVOLUTION;
-		double adjustedLeftPower = power + Constants.DRIVE_P * error;
-		double adjustedRightPower = power - Constants.DRIVE_P * error;
+		double adjustedLeftPower = power - error / 180;
+		double adjustedRightPower = power + error / 180;
 		double distanceToTarget = Math.abs(endPositionTick - position) / Constants.ENCODER_INCHES_TO_TICKS;
         System.out.println("error: " + error + "  leftPower: " + adjustedLeftPower + " rightPower:" + adjustedRightPower + "  distanceToTarget: " + distanceToTarget);
 		//the scalar slows down the robot as it gets closer to the goal,
@@ -96,7 +96,7 @@ public class DriveSubsystem extends SubsystemBase {
 	public void gyroTurn(double targetAngleDeg) {
         System.out.println("turning using gyro");
 		double error = targetAngleDeg - getHeading();
-		// differentialDrive.tankDrive(error / 360, error / 360);
+		powerDrive(-error / 360, -error / 360);  
 	}
 
 	private void setPID(CANSparkMax motor, double P, double I, double D) {
