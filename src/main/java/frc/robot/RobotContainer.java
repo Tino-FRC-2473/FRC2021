@@ -56,6 +56,7 @@ public class RobotContainer {
 	private Joystick buttonPanel;
 	public RobotContainer() {
 		// Configure the button bindings
+		System.out.println("Creating the auto command in robot container");
 		configureButtonBindings();
 	}
 

@@ -51,6 +51,8 @@ public class DriveSubsystem extends SubsystemBase {
 		differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup); 
 		gyro = new AHRS(SPI.Port.kMXP);
         gyro.reset();
+        gyro.zeroYaw();
+        System.out.println(gyro.getAngle());
 
 		initPID();
 	}
@@ -72,7 +74,9 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public boolean gyroDrive(double endPositionTick, double heading, double power) {
-		double error = heading - getHeading();
+        double currentHeading = getHeading();
+		double error = heading - currentHeading;
+        System.out.println("current Heading: " + currentHeading);
         double position = getAverageEncoderDistance() * Constants.COUNTS_PER_MOTOR_REVOLUTION;
 		double adjustedLeftPower = power - error / 180;
 		double adjustedRightPower = power + error / 180;
@@ -142,6 +146,11 @@ public class DriveSubsystem extends SubsystemBase {
 	public double getAverageEncoderDistance() {
 		return (-frontLeftMotor.getEncoder().getPosition() + frontRightMotor.getEncoder().getPosition()) / 2.0;
 	}
+
+    public void resetGyro() {
+        gyro.reset();
+        gyro.zeroYaw();
+    }
 
 	@Override
 	public void periodic() {
