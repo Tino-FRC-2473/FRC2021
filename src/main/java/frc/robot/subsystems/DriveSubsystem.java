@@ -94,8 +94,9 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void gyroTurn(double targetAngleDeg) {
+        System.out.println("turning using gyro");
 		double error = targetAngleDeg - getHeading();
-		differentialDrive.tankDrive(error * Constants.DRIVE_P, error * Constants.DRIVE_P);
+		// differentialDrive.tankDrive(error / 360, error / 360);
 	}
 
 	private void setPID(CANSparkMax motor, double P, double I, double D) {
