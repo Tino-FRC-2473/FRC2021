@@ -24,12 +24,7 @@ public class TurnUsingGyro extends CommandBase {
 
     @Override
     public void execute() {
-        double error = targetAngleDeg - driveSubsystem.getHeading();
-        if(Math.abs(error) >= accuracy) {
-            driveSubsystem.gyroTurn(targetAngleDeg);
-        }else {
-            isFinished = true;
-        }
+        isFinished = driveSubsystem.gyroTurn(targetAngleDeg);
     }
 
     @Override

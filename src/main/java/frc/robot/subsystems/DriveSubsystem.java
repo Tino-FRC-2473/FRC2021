@@ -93,10 +93,16 @@ public class DriveSubsystem extends SubsystemBase {
 		}
 	}
 
-	public void gyroTurn(double targetAngleDeg) {
-        System.out.println("turning using gyro");
+	public boolean gyroTurn(double targetAngleDeg) {
 		double error = targetAngleDeg - getHeading();
-		powerDrive(-error / 360, -error / 360);  
+        System.out.println("error: " + error + " heading: " + getHeading());
+        //double power = Math.max(Math.abs(error / 360), 0.1) * (error < 0 ? -1 : 1);
+        if(Math.abs(error) >= 2.0) {
+		    powerDrive(error / 360, error / 360);  
+            return false;
+        }else {
+            return true;
+        }
 	}
 
 	private void setPID(CANSparkMax motor, double P, double I, double D) {
