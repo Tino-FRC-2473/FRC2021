@@ -50,7 +50,6 @@ public class DriveSubsystem extends SubsystemBase {
 		
 		differentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup); 
 		gyro = new AHRS(SPI.Port.kMXP);
-        gyro.calibrate();
         gyro.reset();
 
 		initPID();
@@ -99,10 +98,8 @@ public class DriveSubsystem extends SubsystemBase {
         //double power = Math.max(Math.abs(error / 360), 0.1) * (error < 0 ? -1 : 1);
         if(Math.abs(error) >= 2.0) {
 		    powerDrive(error / 360, error / 360);  
-            return false;
-        }else {
-            return true;
         }
+        return Math.abs(error) <= 2.0;
 	}
 
 	private void setPID(CANSparkMax motor, double P, double I, double D) {
