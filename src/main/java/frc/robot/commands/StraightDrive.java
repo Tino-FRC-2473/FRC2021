@@ -16,6 +16,7 @@ public class StraightDrive extends CommandBase {
     public StraightDrive(DriveSubsystem subsystem, double inches, double power) {
         driveSubsystem = subsystem;
         heading = driveSubsystem.getHeading();
+        System.out.println("got the heading in straightdrive command");
         this.power = power;
         endPosition = inches * Constants.DRIVE_TICKS_PER_INCH + driveSubsystem.getAverageEncoderDistance() * Constants.COUNTS_PER_MOTOR_REVOLUTION;
         addRequirements(subsystem);
