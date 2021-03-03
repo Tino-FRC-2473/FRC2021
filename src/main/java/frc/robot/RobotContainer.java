@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+
 
 // Commands
 import frc.robot.commands.StraightLineAuto;
@@ -36,14 +38,16 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
   
-  private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, true);
 	private final Command autonomousCommand = 
-		new SequentialCommandGroup (
-			new StraightDrive(driveSubsystem, 120, 0.3),
-			new TurnUsingGyro(driveSubsystem, 90),
-			new StraightDrive(driveSubsystem, 60, 0.3)
-			// new TurnUsingGyro(driveSubsystem, 45),
-			// new StraightDrive(driveSubsystem, 36, 0.3)
+		new ParallelCommandGroup (
+			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, true),
+			new SequentialCommandGroup (
+				new StraightDrive(driveSubsystem, 120, 0.3),
+				new TurnUsingGyro(driveSubsystem, 90),
+				new StraightDrive(driveSubsystem, 60, 0.3)
+				// new TurnUsingGyro(driveSubsystem, 45),
+				// new StraightDrive(driveSubsystem, 36, 0.3)
+			)
 		);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
@@ -89,10 +93,6 @@ public class RobotContainer {
 		wheel = new Joystick(Constants.WHEEL_PORT);
 		throttle = new Joystick(Constants.THROTTLE_PORT);
 		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
-	}
-
-	public EnableShooterCommand getEnableShooterCommand() {
-		return enableShooterCommand;
 	}
 
 	/**
