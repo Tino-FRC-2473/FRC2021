@@ -38,10 +38,10 @@ public class RobotContainer {
 	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
 
-	private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, true);
+	private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false);
 	private final Command autonomousCommand = 
 		new ParallelCommandGroup (
-			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, true),
+			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
 			new SequentialCommandGroup (
 				new StraightDrive(driveSubsystem, 120, 0.3),
 				new TurnUsingGyro(driveSubsystem, 90),
