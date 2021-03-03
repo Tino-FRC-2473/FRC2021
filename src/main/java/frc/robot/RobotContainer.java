@@ -43,7 +43,7 @@ public class RobotContainer {
 		new ParallelCommandGroup (
 			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
 			new SequentialCommandGroup (
-				new StraightDrive(driveSubsystem, 125, 0.3),
+				new StraightDrive(driveSubsystem, 135, 0.3),
 				new TurnUsingGyro(driveSubsystem, 90),
 				new StraightDrive(driveSubsystem, 85, 0.3),
 				new TurnUsingGyro(driveSubsystem, 45),
