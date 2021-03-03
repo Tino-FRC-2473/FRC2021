@@ -5,32 +5,25 @@ import frc.robot.subsystems.IntakeStorageSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class EnableShooterCommand extends CommandBase {
+public class DisableIntake extends CommandBase {
 
 	private final ShooterSubsystem shooterSubsystem;
 	private final IntakeStorageSubsystem intakeStorageSubsystem;
-	private boolean status;
 
 	/**
 	 * Creates a new RunShooterToRPMCommand.
 	 *
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public EnableShooterCommand(ShooterSubsystem shooterSubsystem, IntakeStorageSubsystem intakeStorageSubsystem, boolean status) {
+	public DisableIntake(ShooterSubsystem shooterSubsystem, IntakeStorageSubsystem intakeStorageSubsystem) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.intakeStorageSubsystem = intakeStorageSubsystem;
-		this.status = status;
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		if (status) {
-			shooterSubsystem.runShooterPower(shooterSubsystem.getTargetPower());
-		} else {
-			shooterSubsystem.runShooterPower(0);
-		}
-		intakeStorageSubsystem.deployIntake(0.5);
+		intakeStorageSubsystem.retractIntake();
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -48,10 +41,7 @@ public class EnableShooterCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		if (status) {
-			return Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01;
-		}
-		return Math.abs(shooterSubsystem.getPower()) < 0.01;
+		return Math.abs(intakeStorageSubsystem.getIntakeMotorPower()) < 0.1;
 	}
 
 }

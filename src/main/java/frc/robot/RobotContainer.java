@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
+import frc.robot.commands.DisableIntake;
 import frc.robot.commands.EnableShooterCommand;
 
 // Subsystems
@@ -39,6 +40,7 @@ public class RobotContainer {
 	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
 
 	private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false);
+	private final DisableIntake disableIntake = new DisableIntake(shooterSubsystem, intakeStorageSubsystem);
 	private final Command autonomousCommand = 
 		new ParallelCommandGroup (
 			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
@@ -109,6 +111,10 @@ public class RobotContainer {
 		// An ExampleCommand will run in autonomous
 
 		return autonomousCommand; 
+	}
+
+	public Command disableIntake() {
+		return disableIntake();
 	}
 
 	// public XboxController getDriver() {

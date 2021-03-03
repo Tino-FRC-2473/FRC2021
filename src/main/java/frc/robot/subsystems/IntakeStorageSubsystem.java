@@ -42,15 +42,16 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 		intakeMotor.set(power);
 	}
 
-	// public void deployIntake(double power) {
-	// 	extendIntakePistons();
-	// 	runIntakeMotor(power);
-	// }
+	public void deployIntake(double power) {
+		extendIntakePistons();
+		runIntakeMotor(power);
+		runStorageMotor(power);
+	}
 
-	// public void retractIntake() {
-	// 	retractIntakePistons();
-	// 	runIntakeMotor(0);
-	// }
+	public void retractIntake() {
+		retractIntakePistons();
+		runIntakeMotor(0);
+	}
 
 	public void extendIntakePistons() {
 		intakePistons.set(Value.kOff);
@@ -66,6 +67,9 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 		storageMotor.set(power);
 	}
 
+	public double getIntakeMotorPower() {
+		return intakeMotor.get();
+	}
 	@Override
 	public void periodic() {
     	// This method will be called once per scheduler run
