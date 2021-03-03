@@ -30,6 +30,7 @@ public class EnableShooterCommand extends CommandBase {
 		} else {
 			shooterSubsystem.runShooterPower(0);
 		}
+		intakeStorageSubsystem.extendIntakePistons();
 		intakeStorageSubsystem.runIntakeMotor(0.5);
 		intakeStorageSubsystem.runStorageMotor(0.5);
 	}
