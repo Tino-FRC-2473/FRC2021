@@ -40,7 +40,7 @@ public class RobotContainer {
 	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
 
 	private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false);
-	private final DisableIntake disableIntake = new DisableIntake(shooterSubsystem, intakeStorageSubsystem);
+	private final DisableIntake disableIntakeCommand = new DisableIntake(shooterSubsystem, intakeStorageSubsystem);
 	private final Command autonomousCommand = 
 		new ParallelCommandGroup (
 			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
@@ -114,7 +114,7 @@ public class RobotContainer {
 	}
 
 	public Command disableIntake() {
-		return disableIntake();
+		return disableIntakeCommand;
 	}
 
 	// public XboxController getDriver() {
