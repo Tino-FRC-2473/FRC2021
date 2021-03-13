@@ -20,7 +20,8 @@ import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
 import frc.robot.commands.DisableIntake;
 import frc.robot.commands.EnableShooterCommand;
-
+import frc.robot.commands.RunIntakeCommand;
+import frc.robot.commands.RunShooterCommand;
 // Subsystems
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeStorageSubsystem;
@@ -39,6 +40,8 @@ public class RobotContainer {
 	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
 
+	private final RunIntakeCommand runIntakeCommand = new RunIntakeCommand(intakeStorageSubsystem);
+	private final RunShooterCommand runShooterCommand = new RunShooterCommand(shooterSubsystem);
 	private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false);
 	private final DisableIntake disableIntakeCommand = new DisableIntake(shooterSubsystem, intakeStorageSubsystem);
 	private final Command autonomousCommand = 

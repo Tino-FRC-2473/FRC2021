@@ -4,34 +4,43 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RunShooterCommand extends Command {
-  public RunShooterCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class RunShooterCommand extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final ShooterSubsystem shooter_subsystem;
+
+  /**
+   * Creates a new RunIntakeCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+  public RunShooterCommand(ShooterSubsystem subsystem) {
+    shooter_subsystem = subsystem;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(subsystem);
   }
 
-  // Called just before this Command runs the first time
+  // Called when the command is initially scheduled.
   @Override
-  protected void initialize() {}
+  public void initialize() {}
 
-  // Called repeatedly when this Command is scheduled to run
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  protected void execute() {}
+  public void execute() {}
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Called once the command ends or is interrupted.
   @Override
-  protected boolean isFinished() {
+  public void end(boolean interrupted) {}
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {}
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {}
+  public void runShooter(){
+    shooter_subsystem.runShooterPower(0.75);
+  }
 }
