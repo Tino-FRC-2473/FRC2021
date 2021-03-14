@@ -34,10 +34,10 @@ public static final int SPARK_FRONT_RIGHT_ID = 1;
 public static final int SPARK_BACK_RIGHT_ID = 2;
 
 // units: meters 
-public static final double K_S_DRIVE = 0.183;
-public static final double K_V_DRIVE = 0.56;
-public static final double K_A_DRIVE = 0.0837;
-public static final double K_P_DRIVE = 3.85;
+public static final double K_S_DRIVE = 0.126;
+public static final double K_V_DRIVE = 5.83;
+public static final double K_A_DRIVE = 0.88;
+public static final double K_P_DRIVE = 1.5;
 
 // placeholder trackwidth, need to update with empirical trackwidth after drive characterization
 public static final double K_TRACKWIDTH_METERS = 0.75;
