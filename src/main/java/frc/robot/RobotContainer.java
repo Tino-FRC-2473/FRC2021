@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
+import frc.robot.cv.CVDriveCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -27,14 +28,7 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	private final Command autonomousCommand = 
-		new SequentialCommandGroup (
-			new StraightDrive(driveSubsystem, 120, 0.3),
-			new TurnUsingGyro(driveSubsystem, 90),
-			new StraightDrive(driveSubsystem, 60, 0.3)
-			// new TurnUsingGyro(driveSubsystem, 45),
-			// new StraightDrive(driveSubsystem, 36, 0.3)
-		);
+	private final Command autonomousCommand = new CVDriveCommand(driveSubsystem);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**

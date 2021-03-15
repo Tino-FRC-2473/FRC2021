@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.TeleopArcadeDriveCommand;
 import frc.robot.commands.TeleopTankDriveCommand;
+import edu.wpi.first.wpilibj.SerialPort.Port;
+import frc.robot.cv.Jetson;
+import frc.robot.cv.CVData;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +24,7 @@ public class Robot extends TimedRobot {
 	private Command m_autonomousCommand;
 
 	public static RobotContainer robotContainer;
+	public static Jetson jetson;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -33,6 +37,7 @@ public class Robot extends TimedRobot {
 		// autonomous chooser on the dashboard.
 		System.out.println("Created the Robot Container");
 		robotContainer = new RobotContainer();
+		jetson = new Jetson(9600, Port.kUSB);
 
 	}
 
@@ -78,11 +83,13 @@ public class Robot extends TimedRobot {
 		m_autonomousCommand = robotContainer.getAutonomousCommand();
 		robotContainer.driveSubsystem.resetGyro();
 
+		jetson.updateVision();
+
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.schedule();
-			System.out.println("Command has been scheduled");
-		}
+		// if (m_autonomousCommand != null) {
+		// 	m_autonomousCommand.schedule();
+		// 	System.out.println("Command has been scheduled");
+		// }
 	}
 
 	/**
@@ -122,5 +129,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+	}
+
+	public static CVData getCVData() {
+		return jetson.getCVData();
 	}
 }
