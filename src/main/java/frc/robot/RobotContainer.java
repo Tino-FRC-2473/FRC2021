@@ -116,22 +116,36 @@ public class RobotContainer {
 		Translation2d D5 = new Translation2d(Units.feetToMeters(12.5), Units.feetToMeters(5));
 
 		Translation2d B7 = new Translation2d(Units.feetToMeters(17.5), Units.feetToMeters(10));
+
+		Pose2d testPoseD5 = new Pose2d(Units.feetToMeters(12.5), Units.feetToMeters(5), new Rotation2d(0));
 		
 		Pose2d endPoseB11 = new Pose2d(Units.feetToMeters(27), Units.feetToMeters(10), new Rotation2d(0));
 		
-		Trajectory traj1 = TrajectoryGenerator.generateTrajectory(
+		// Trajectory traj1 = TrajectoryGenerator.generateTrajectory(
+		// 	// starting position of robot
+		// 	initialPoseB1,
+		// 	// pass through these waypoints to intake power cells
+		// 	List.of(B3, D5, B7),
+		// 	// end at this position 
+		// 	endPoseB11,
+		// 	// pass config
+		// 	config
+		// );
+
+		// trajectory for testing:
+		Trajectory trajTest = TrajectoryGenerator.generateTrajectory(
 			// starting position of robot
 			initialPoseB1,
 			// pass through these waypoints to intake power cells
-			List.of(B3, D5, B7),
+			List.of(B3),
 			// end at this position 
-			endPoseB11,
+			testPoseD5,
 			// pass config
 			config
 		);
 
 		RamseteCommand ramseteCommand = new RamseteCommand( 
-			traj1,
+			trajTest,
 			driveSubsystem::getPose,
 			new RamseteController(Constants.K_RAMSETE_B, Constants.K_RAMSETE_ZETA),
 			new SimpleMotorFeedforward(Constants.K_S_DRIVE, 
@@ -147,7 +161,7 @@ public class RobotContainer {
 		);
 
 		// reset odometry to starting pose of trajectory
-		driveSubsystem.resetOdometry(traj1.getInitialPose());
+		driveSubsystem.resetOdometry(trajTest.getInitialPose());
 
 		// run path following, then stop
 		return ramseteCommand.andThen(()-> driveSubsystem.tankDriveVolts(0, 0));
