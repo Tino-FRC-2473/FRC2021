@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
       autonomousCommand.cancel();
     }
 
-    enableShooterCommand = robotContainer.getEnableShooterCommand();
+    enableShooterCommand = robotContainer.getEnableIntakeShooterCommand();
     
     if (enableShooterCommand != null) {
       enableShooterCommand.schedule();

@@ -19,7 +19,7 @@ import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
 import frc.robot.commands.DisableIntake;
-import frc.robot.commands.EnableShooterCommand;
+import frc.robot.commands.EnableIntakeShooterCommand;
 import frc.robot.commands.RunIntakeCommand;
 import frc.robot.commands.RunShooterCommand;
 // Subsystems
@@ -40,13 +40,11 @@ public class RobotContainer {
 	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
 
-	private final RunIntakeCommand runIntakeCommand = new RunIntakeCommand(intakeStorageSubsystem);
-	private final RunShooterCommand runShooterCommand = new RunShooterCommand(shooterSubsystem);
-	private final EnableShooterCommand enableShooterCommand = new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false);
+	private final EnableIntakeShooterCommand enableIntakeShooterCommand = new EnableIntakeShooterCommand(shooterSubsystem, intakeStorageSubsystem, true); // for auto
 	private final DisableIntake disableIntakeCommand = new DisableIntake(shooterSubsystem, intakeStorageSubsystem);
 	private final Command autonomousCommand = 
 		new ParallelCommandGroup (
-			new EnableShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
+			new EnableIntakeShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
 			new SequentialCommandGroup (
 				new StraightDrive(driveSubsystem, 144, 0.3),
 				new TurnUsingGyro(driveSubsystem, 90),
@@ -99,10 +97,17 @@ public class RobotContainer {
 		wheel = new Joystick(Constants.WHEEL_PORT);
 		throttle = new Joystick(Constants.THROTTLE_PORT);
 		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
+
+
+		buttonA.whenPressed(new RunShooterCommand(shooterSubsystem, true));
+		buttonB.whenPressed(new RunShooterCommand(shooterSubsystem, false));
+
+		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
+		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
 	}
 
-	public EnableShooterCommand getEnableShooterCommand() {
-		return enableShooterCommand;
+	public EnableIntakeShooterCommand getEnableIntakeShooterCommand() {
+		return enableIntakeShooterCommand;
 	}
 
 	/**

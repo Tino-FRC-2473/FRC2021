@@ -5,7 +5,7 @@ import frc.robot.subsystems.IntakeStorageSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class EnableShooterCommand extends CommandBase {
+public class EnableIntakeShooterCommand extends CommandBase {
 
 	private final ShooterSubsystem shooterSubsystem;
 	private final IntakeStorageSubsystem intakeStorageSubsystem;
@@ -16,7 +16,7 @@ public class EnableShooterCommand extends CommandBase {
 	 *
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public EnableShooterCommand(ShooterSubsystem shooterSubsystem, IntakeStorageSubsystem intakeStorageSubsystem, boolean status) {
+	public EnableIntakeShooterCommand(ShooterSubsystem shooterSubsystem, IntakeStorageSubsystem intakeStorageSubsystem, boolean status) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.intakeStorageSubsystem = intakeStorageSubsystem;
 		this.status = status;

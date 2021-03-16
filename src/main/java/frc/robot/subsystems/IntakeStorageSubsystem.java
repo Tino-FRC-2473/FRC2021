@@ -17,6 +17,7 @@ import frc.robot.Constants.IntakeStorageConstants;
 public class IntakeStorageSubsystem extends SubsystemBase {
 	private CANSparkMax intakeMotor;
 	private CANSparkMax storageMotor;
+	private double targetIntakeMotorPower;
 
 	private DoubleSolenoid intakePistons;
 
@@ -28,6 +29,7 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 
 		intakePistons = new DoubleSolenoid(IntakeStorageConstants.INTAKE_PISTON_FORWARD_PORT, IntakeStorageConstants.INTAKE_PISTON_REVERSE_PORT);
 	
+		targetIntakeMotorPower = 0.5;
 
 
 		intakeMotor.set(0);
@@ -70,6 +72,11 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 	public double getIntakeMotorPower() {
 		return intakeMotor.get();
 	}
+
+	public double getTargetIntakeMotorPower() {
+		return targetIntakeMotorPower;
+	}
+
 	@Override
 	public void periodic() {
     	// This method will be called once per scheduler run

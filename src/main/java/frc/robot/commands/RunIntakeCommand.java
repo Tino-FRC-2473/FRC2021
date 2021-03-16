@@ -9,22 +9,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunIntakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeStorageSubsystem intake_subsystem;
+  private final IntakeStorageSubsystem intakeStorageSubsystem;
+  private boolean status;
 
   /**
    * Creates a new RunIntakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public RunIntakeCommand(IntakeStorageSubsystem subsystem) {
-    intake_subsystem = subsystem;
+  public RunIntakeCommand(IntakeStorageSubsystem intakeStorageSubsystem, boolean status) {
+    this.intakeStorageSubsystem = intakeStorageSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    this.status = status;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    if (status) {
+      intakeStorageSubsystem.deployIntake(0.5);
+    } else {
+      intakeStorageSubsystem.retractIntake();
+    }
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -37,14 +44,9 @@ public class RunIntakeCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
-
-  public void runIntake(){
-    intake_subsystem.runIntakeMotor(0.75);
-  }
-
-  public void runStorage(){
-    intake_subsystem.runStorageMotor(0.75);
+    if (status) {
+			return Math.abs(intakeStorageSubsystem.getIntakeMotorPower() - intakeStorageSubsystem.getTargetIntakeMotorPower()) < 0.01;
+		}
+		return Math.abs(intakeStorageSubsystem.getIntakeMotorPower()) < 0.01;
   }
 }
