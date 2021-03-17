@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.util.Units;
 
 public class DriveSubsystem extends SubsystemBase {
 	/**
@@ -213,7 +214,7 @@ public class DriveSubsystem extends SubsystemBase {
 	public void periodic() {
 
 		// This method will be called once per scheduler run
-		odometry.update(gyro.getRotation2d(), frontLeftMotor.getEncoder().getPosition(),
-                frontRightMotor.getEncoder().getPosition());
+		odometry.update(gyro.getRotation2d(), frontLeftMotor.getEncoder().getPosition() * Constants.GEAR_RATIO * Units.inchesToMeters(Constants.DRIVE_WHEEL_CIRCUMFERENCE_INCHES),
+                frontRightMotor.getEncoder().getPosition() * Constants.GEAR_RATIO * Units.inchesToMeters(Constants.DRIVE_WHEEL_CIRCUMFERENCE_INCHES));
 	}
 }
