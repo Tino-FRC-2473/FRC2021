@@ -86,10 +86,10 @@ public class Robot extends TimedRobot {
 		jetson.updateVision();
 
 		// schedule the autonomous command (example)
-		// if (m_autonomousCommand != null) {
-		// 	m_autonomousCommand.schedule();
-		// 	System.out.println("Command has been scheduled");
-		// }
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.schedule();
+			System.out.println("Command has been scheduled");
+		}
 	}
 
 	/**
