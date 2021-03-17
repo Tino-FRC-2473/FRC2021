@@ -34,7 +34,7 @@ public final class Constants {
     public static final double K_P_DRIVE = 1.5;
 
     // placeholder trackwidth, need to update with empirical trackwidth after drive characterization
-    public static final double K_TRACKWIDTH_METERS = 0.75;
+    public static final double K_TRACKWIDTH_METERS = 1.0565;
     public static final DifferentialDriveKinematics K_DRIVE_KINEMATICS = new DifferentialDriveKinematics(K_TRACKWIDTH_METERS);
 
     // units: m/s and m/s^2
