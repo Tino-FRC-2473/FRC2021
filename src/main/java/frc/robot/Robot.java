@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
 		System.out.println("Current Pose: " + robotContainer.driveSubsystem.getPose());
+		System.out.println("Left Motor Voltage: " + robotContainer.driveSubsystem.accessLeftVolts + ", Right Motor Voltage: " + robotContainer.driveSubsystem.accessRightVolts);
 	}
 
 	/**

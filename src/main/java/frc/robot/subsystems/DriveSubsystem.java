@@ -40,6 +40,8 @@ public class DriveSubsystem extends SubsystemBase {
 
 	DifferentialDriveOdometry odometry;
 
+	public double accessLeftVolts, accessRightVolts;
+
 	public DriveSubsystem() {
 
 		frontLeftMotor = new CANSparkMax(Constants.SPARK_FRONT_LEFT_ID, MotorType.kBrushless);
@@ -181,10 +183,12 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
-        frontLeftMotor.setVoltage(-leftVolts);
-        backLeftMotor.setVoltage(-leftVolts);
-        frontRightMotor.setVoltage(rightVolts);
-        backRightMotor.setVoltage(rightVolts);
+		accessLeftVolts = leftVolts;
+		accessRightVolts = rightVolts;
+        frontLeftMotor.setVoltage(leftVolts);
+        backLeftMotor.setVoltage(leftVolts);
+        frontRightMotor.setVoltage(-rightVolts);
+        backRightMotor.setVoltage(-rightVolts);
         differentialDrive.feed();
     }
 

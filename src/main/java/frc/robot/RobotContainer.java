@@ -117,11 +117,11 @@ public class RobotContainer {
 								 // apply voltage constraint
 								 .addConstraint(autoVoltageConstraint);
 
-		Pose2d initialPoseB1 = new Pose2d(Units.feetToMeters(2.5), Units.feetToMeters(10), new Rotation2d(0));	
+		Pose2d initialPoseB1 = new Pose2d(Units.feetToMeters(-2.5), Units.feetToMeters(-10), new Rotation2d(0));	
 		
 		// Translation2d B3 = new Translation2d(Units.feetToMeters(7.5), Units.feetToMeters(10));
 
-		Translation2d miniB3 = new Translation2d(Units.feetToMeters(5), Units.feetToMeters(10));
+		Translation2d miniB3 = new Translation2d(Units.feetToMeters(-5), Units.feetToMeters(-10));
 
 		// Translation2d D5 = new Translation2d(Units.feetToMeters(12.5), Units.feetToMeters(5));
 
@@ -129,7 +129,7 @@ public class RobotContainer {
 
 		// Pose2d testPoseD5 = new Pose2d(Units.feetToMeters(12.5), Units.feetToMeters(5), new Rotation2d(0));
 
-		Pose2d miniTestPoseD5 = new Pose2d(Units.feetToMeters(7.5), Units.feetToMeters(7.5), new Rotation2d(0));
+		Pose2d miniTestPoseD5 = new Pose2d(Units.feetToMeters(-7.5), Units.feetToMeters(-7.5), new Rotation2d(0));
 		
 		// Pose2d endPoseB11 = new Pose2d(Units.feetToMeters(27), Units.feetToMeters(10), new Rotation2d(0));
 		
