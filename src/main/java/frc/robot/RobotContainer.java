@@ -119,15 +119,19 @@ public class RobotContainer {
 
 		Pose2d initialPoseB1 = new Pose2d(Units.feetToMeters(2.5), Units.feetToMeters(10), new Rotation2d(0));	
 		
-		Translation2d B3 = new Translation2d(Units.feetToMeters(7.5), Units.feetToMeters(10));
+		// Translation2d B3 = new Translation2d(Units.feetToMeters(7.5), Units.feetToMeters(10));
 
-		Translation2d D5 = new Translation2d(Units.feetToMeters(12.5), Units.feetToMeters(5));
+		Translation2d miniB3 = new Translation2d(Units.feetToMeters(5), Units.feetToMeters(10));
 
-		Translation2d B7 = new Translation2d(Units.feetToMeters(17.5), Units.feetToMeters(10));
+		// Translation2d D5 = new Translation2d(Units.feetToMeters(12.5), Units.feetToMeters(5));
 
-		Pose2d testPoseD5 = new Pose2d(Units.feetToMeters(12.5), Units.feetToMeters(5), new Rotation2d(0));
+		// Translation2d B7 = new Translation2d(Units.feetToMeters(17.5), Units.feetToMeters(10));
+
+		// Pose2d testPoseD5 = new Pose2d(Units.feetToMeters(12.5), Units.feetToMeters(5), new Rotation2d(0));
+
+		Pose2d miniTestPoseD5 = new Pose2d(Units.feetToMeters(7.5), Units.feetToMeters(7.5), new Rotation2d(0));
 		
-		Pose2d endPoseB11 = new Pose2d(Units.feetToMeters(27), Units.feetToMeters(10), new Rotation2d(0));
+		// Pose2d endPoseB11 = new Pose2d(Units.feetToMeters(27), Units.feetToMeters(10), new Rotation2d(0));
 		
 		// Trajectory traj1 = TrajectoryGenerator.generateTrajectory(
 		// 	// starting position of robot
@@ -145,9 +149,9 @@ public class RobotContainer {
 			// starting position of robot
 			initialPoseB1,
 			// pass through these waypoints to intake power cells
-			List.of(B3),
+			List.of(miniB3),
 			// end at this position 
-			testPoseD5,
+			miniTestPoseD5,
 			// pass config
 			config
 		);
