@@ -18,16 +18,18 @@ public class Jetson extends SerialPort {
 
 	public void updateVision() {
 		info = readString();
+		System.out.println("String from the Jetson: " + info);
 		//make sure the string is of correct length
-		if(info.length() >= 3) {
+		if(info.indexOf("S") >= 0) {
+			int startIndex = info.indexOf("S");
 			//check is the path is the red or blue path
-			if(info.substring(0, 1).equalsIgnoreCase("R")) {
+			if(info.substring( startIndex + 2, startIndex + 3).equalsIgnoreCase("R")) {
 				isRedPath = true;
 			}else {
 				isRedPath = false;
 			}
 			//check is the path is path A or path B
-			if(info.substring(2, 3).equalsIgnoreCase("A")) {
+			if(info.substring(startIndex + 3, startIndex + 4).equalsIgnoreCase("A")) {
 				isPathA = true;
 			}else {
 				isPathA = false;

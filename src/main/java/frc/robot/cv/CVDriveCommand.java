@@ -25,7 +25,7 @@ public class CVDriveCommand extends CommandBase {
     @Override
     public void execute() {
         //currently just prints out the detected path
-       System.out.println((cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
+       System.out.println("Path: " + (cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
     }
 
     @Override
