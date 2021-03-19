@@ -23,13 +23,13 @@ public class Jetson extends SerialPort {
 		if(info.indexOf("S") >= 0) {
 			int startIndex = info.indexOf("S");
 			//check is the path is the red or blue path
-			if(info.substring( startIndex + 2, startIndex + 3).equalsIgnoreCase("R")) {
+			if(info.substring( startIndex + 3, startIndex + 4).equalsIgnoreCase("R")) {
 				isRedPath = true;
 			}else {
 				isRedPath = false;
 			}
 			//check is the path is path A or path B
-			if(info.substring(startIndex + 3, startIndex + 4).equalsIgnoreCase("A")) {
+			if(info.substring(startIndex + 2, startIndex + 3).equalsIgnoreCase("A")) {
 				isPathA = true;
 			}else {
 				isPathA = false;
