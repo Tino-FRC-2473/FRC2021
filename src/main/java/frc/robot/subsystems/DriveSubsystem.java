@@ -181,10 +181,10 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
-        frontLeftMotor.setVoltage(leftVolts);
-        backLeftMotor.setVoltage(leftVolts);
-        frontRightMotor.setVoltage(-rightVolts);
-        backRightMotor.setVoltage(-rightVolts);
+        frontLeftMotor.setVoltage(-leftVolts);
+        backLeftMotor.setVoltage(-leftVolts);
+        frontRightMotor.setVoltage(rightVolts);
+        backRightMotor.setVoltage(rightVolts);
         differentialDrive.feed();
     }
 
