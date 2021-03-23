@@ -99,8 +99,8 @@ public class RobotContainer {
 		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
 
 
-		buttonA.whenPressed(new RunShooterCommand(shooterSubsystem, true));
-		buttonB.whenPressed(new RunShooterCommand(shooterSubsystem, false));
+		buttonA.whenPressed(new RunShooterCommand(shooterSubsystem, intakeStorageSubsystem, true));
+		buttonB.whenPressed(new RunShooterCommand(shooterSubsystem, intakeStorageSubsystem, false));
 
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
