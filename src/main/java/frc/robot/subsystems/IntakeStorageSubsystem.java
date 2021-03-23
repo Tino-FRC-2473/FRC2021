@@ -53,6 +53,7 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 	public void retractIntake() {
 		retractIntakePistons();
 		runIntakeMotor(0);
+		runStorageMotor(0);
 	}
 
 	public void extendIntakePistons() {
