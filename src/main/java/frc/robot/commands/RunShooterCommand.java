@@ -62,7 +62,6 @@ public class RunShooterCommand extends CommandBase {
 			} else {
 				return false;
 			}
-			
 		} else {
 			return Math.abs(shooterSubsystem.getPower()) < 0.01;
 		}
