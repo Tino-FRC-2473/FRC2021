@@ -6,7 +6,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.Robot;
 
-public class CVDriveCommand extends SequentialCommandGroup {
+public class CVDriveCommand extends CommandBase {
 
     DriveSubsystem driveSubsystem;
     CVData cvData;
@@ -29,13 +29,13 @@ public class CVDriveCommand extends SequentialCommandGroup {
         //currently just prints out the detected path
        System.out.println("Path: " + (cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
        if(cvData.isRedPath() && cvData.isPathA()) {
-            addCommands(new RedPathA(driveSubsystem));
+            new RedPathA(driveSubsystem);
        }else if(cvData.isRedPath() && !cvData.isPathA()) {
-            addCommands(new RedPathB(driveSubsystem));
+            new RedPathB(driveSubsystem);
        }else if(!cvData.isRedPath() && cvData.isPathA()) {
-            addCommands(new BluePathA(driveSubsystem));
+            new BluePathA(driveSubsystem);
        }else {
-            addCommands(new BluePathB(driveSubsystem));
+            new BluePathB(driveSubsystem);
        }
     }
 
