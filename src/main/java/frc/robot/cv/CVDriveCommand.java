@@ -6,10 +6,12 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.Robot;
 
-public class CVDriveCommand extends CommandBase {
+public class CVDriveCommand extends SequentialCommandGroup {
 
     DriveSubsystem driveSubsystem;
     CVData cvData;
+    SequentialCommandGroup path;
+    private boolean isFinished = false;
   
 
 
@@ -22,21 +24,22 @@ public class CVDriveCommand extends CommandBase {
     @Override
     public void initialize() { 
         cvData = Robot.getCVData();
+        System.out.println("Path: " + (cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
+       if(cvData.isRedPath() && cvData.isPathA()) {
+            path = new RedPathA(driveSubsystem);
+       }else if(cvData.isRedPath() && !cvData.isPathA()) {
+            path = new RedPathB(driveSubsystem);
+       }else if(!cvData.isRedPath() && cvData.isPathA()) {
+            path = new BluePathA(driveSubsystem);
+       }else {
+            path = new BluePathB(driveSubsystem);
+       }
+       addCommands(path);
     }
 
     @Override
     public void execute() {
-        //currently just prints out the detected path
-       System.out.println("Path: " + (cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
-       if(cvData.isRedPath() && cvData.isPathA()) {
-            new RedPathA(driveSubsystem);
-       }else if(cvData.isRedPath() && !cvData.isPathA()) {
-            new RedPathB(driveSubsystem);
-       }else if(!cvData.isRedPath() && cvData.isPathA()) {
-            new BluePathA(driveSubsystem);
-       }else {
-            new BluePathB(driveSubsystem);
-       }
+       isFinished = path.isFinished();
     }
 
     @Override
@@ -45,6 +48,6 @@ public class CVDriveCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return this.isFinished;
     }
 }

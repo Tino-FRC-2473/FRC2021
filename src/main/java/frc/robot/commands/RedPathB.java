@@ -5,10 +5,9 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class RedPathB extends CommandBase {
+public class RedPathB extends SequentialCommandGroup {
 
     DriveSubsystem driveSubsystem;
-    private boolean isFinished = false;
 
 
     public RedPathB(DriveSubsystem subsystem) {
@@ -19,14 +18,8 @@ public class RedPathB extends CommandBase {
     @Override
     public void initialize() {
         driveSubsystem.stopMotors();
-    }
-
-    @Override
-    public void execute() {
-
         System.out.println("Running Red Path B");
-
-        new SequentialCommandGroup (
+        addCommands(    
             new StraightDrive(driveSubsystem, 60, 0.6),
             new TurnUsingGyro(driveSubsystem, -45),
             new StraightDrive(driveSubsystem, 84.9, 0.6),
@@ -34,16 +27,22 @@ public class RedPathB extends CommandBase {
             new StraightDrive(driveSubsystem, 84.9, 0.6),
             new TurnUsingGyro(driveSubsystem, 0)
         );
-        isFinished = true;
     }
+
+    // @Override
+    // public void execute() {
+
+    //     isFinished = path.isFinished();
+        
+    // }
 
     @Override
     public void end(boolean interrupted) {
         driveSubsystem.stop();
     }
 
-    @Override
-    public boolean isFinished() {
-        return this.isFinished;
-    }
+    // @Override
+    // public boolean isFinished() {
+    //     return this.isFinished;
+    // }
 }

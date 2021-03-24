@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class RedPathA extends CommandBase {
+public class RedPathA extends SequentialCommandGroup {
 
     DriveSubsystem driveSubsystem;
     private boolean isFinished = false;
