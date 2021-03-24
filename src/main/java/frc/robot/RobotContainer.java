@@ -29,7 +29,15 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
-	private final Command autonomousCommand = new RedPathB(driveSubsystem);
+	private final Command autonomousCommand = 
+	new SequentialCommandGroup (
+		new StraightDrive(driveSubsystem, 60, 0.6),
+		new TurnUsingGyro(driveSubsystem, -45),
+		new StraightDrive(driveSubsystem, 84.9, 0.6),
+		new TurnUsingGyro(driveSubsystem, 45),
+		new StraightDrive(driveSubsystem, 84.9, 0.6),
+		new TurnUsingGyro(driveSubsystem, 0)
+	);;
 	//new CVDriveCommand(driveSubsystem);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
