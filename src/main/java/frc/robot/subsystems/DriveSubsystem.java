@@ -84,7 +84,7 @@ public class DriveSubsystem extends SubsystemBase {
         System.out.println("error: " + error + "  leftPower: " + adjustedLeftPower + " rightPower:" + adjustedRightPower + "  distanceToTarget: " + distanceToTarget);
 		//the scalar slows down the robot as it gets closer to the goal,
 		//while ensuring that it doesn't slow the robot down too much (keeps scalar between 1 and 0.1)
-		double scalar = 1; //Math.min(1, Math.max(Math.atan(distanceToTarget / 4) * 2 / Math.PI, 0.1));
+		double scalar = Math.min(1, Math.max(distanceToTarget / 24, 0.05)); //Math.min(1, Math.max(Math.atan(distanceToTarget / 4) * 2 / Math.PI, 0.1));
 		//checks whether the robot has arrived at its destination
 		if ((power > 0 && position < endPositionTick) || (power < 0 && position > endPositionTick)) {
         	powerDrive(-adjustedLeftPower * scalar, adjustedRightPower * scalar);
