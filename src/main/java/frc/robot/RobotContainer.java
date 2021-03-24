@@ -37,7 +37,7 @@ public class RobotContainer {
 		new TurnUsingGyro(driveSubsystem, 45),
 		new StraightDrive(driveSubsystem, 84.9, 0.6),
 		new TurnUsingGyro(driveSubsystem, 0)
-	);;
+	);
 	//new CVDriveCommand(driveSubsystem);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
