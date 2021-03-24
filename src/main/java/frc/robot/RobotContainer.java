@@ -88,10 +88,10 @@ public class RobotContainer {
 		driver = new XboxController(Constants.XBOX_CONTROLLER_PORT);
 		// Tank Drive
 		joystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
-		buttonA = new JoystickButton(driver, Constants.BUTTON_A);
-		buttonB = new JoystickButton(driver, Constants.BUTTON_B);
-		buttonX = new JoystickButton(driver, Constants.BUTTON_X);
-		buttonY = new JoystickButton(driver, Constants.BUTTON_Y);
+		buttonA = new JoystickButton(driver, Constants.BUTTON_A); // A - runs shooter wheels + intake back up
+		buttonB = new JoystickButton(driver, Constants.BUTTON_B); // B - stops shooter wheels
+		buttonX = new JoystickButton(driver, Constants.BUTTON_X); // X - runs intake system
+		buttonY = new JoystickButton(driver, Constants.BUTTON_Y); // Y - stops intake system
 
 		// Arcade Drive
 		wheel = new Joystick(Constants.WHEEL_PORT);
@@ -104,6 +104,10 @@ public class RobotContainer {
 
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
+
+		// shooter power testing commands (for reference)
+		// buttonX.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.1));
+		// buttonY.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.1));
 	}
 
 	public EnableIntakeShooterCommand getEnableIntakeShooterCommand() {
