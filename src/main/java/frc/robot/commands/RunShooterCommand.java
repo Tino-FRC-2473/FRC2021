@@ -55,7 +55,9 @@ public class RunShooterCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		if (status) {
+		if (status && Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01) {
+			intakeStorageSubsystem.runStorageMotor(intakeStorageSubsystem.getTargetIntakeMotorPower());
+			shooterSubsystem.runShooterPower(shooterSubsystem.getTargetPower());
 			return Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01;
 		}
 		return Math.abs(shooterSubsystem.getPower()) < 0.01;
