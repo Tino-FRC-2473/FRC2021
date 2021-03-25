@@ -29,6 +29,43 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	private SequentialCommandGroup slalomPath =
+		new SequentialCommandGroup (
+			new TurnUsingGyro(driveSubsystem, 45),
+			new StraightDrive(driveSubsystem, 84.9, 0.6),
+            new TurnUsingGyro(driveSubsystem, 0),
+            new StraightDrive(driveSubsystem, 120, 0.6),
+            new TurnUsingGyro(driveSubsystem, -45),
+            new StraightDrive(driveSubsystem, 84.9, 0.6),
+            new TurnUsingGyro(driveSubsystem, 45),
+			new StraightDrive(driveSubsystem, 42.4, 0.6),
+            new TurnUsingGyro(driveSubsystem, 135),
+            new StraightDrive(driveSubsystem, 42.4, 0.6),
+            new TurnUsingGyro(driveSubsystem, -135),
+            new StraightDrive(driveSubsystem, 84.9, 0.6),
+            new TurnUsingGyro(driveSubsystem, 180),
+			new StraightDrive(driveSubsystem, 120, 0.6),
+            new TurnUsingGyro(driveSubsystem, 135),
+            new StraightDrive(driveSubsystem, 84.9, 0.6)
+		);
+	private SequentialCommandGroup bouncePath = 
+		new SequentialCommandGroup (
+			new TurnUsingGyro(driveSubsystem, 63.4),
+			new StraightDrive(driveSubsystem, 67.1, 0.6),
+            new TurnUsingGyro(driveSubsystem, -63.4),
+            new StraightDrive(driveSubsystem, 134.2, 0.6),
+            new TurnUsingGyro(driveSubsystem, 76.0),
+            new StraightDrive(driveSubsystem, 123.7, 0.6),
+            new TurnUsingGyro(driveSubsystem, -76.0),
+			new StraightDrive(driveSubsystem, 123.7, 0.6),
+            new TurnUsingGyro(driveSubsystem, 0),
+            new StraightDrive(driveSubsystem, 30, 0.6),
+            new TurnUsingGyro(driveSubsystem, 76.0),
+            new StraightDrive(driveSubsystem, 123.7, 0.6),
+            new TurnUsingGyro(driveSubsystem, -63.4),
+			new StraightDrive(driveSubsystem, 67.1, 0.6),
+            new TurnUsingGyro(driveSubsystem, 0)
+		);
 	private final Command autonomousCommand = 
 	new SequentialCommandGroup (
             new StraightDrive(driveSubsystem, 60, 0.6),
