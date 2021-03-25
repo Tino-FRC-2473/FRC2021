@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
+import frc.robot.commands.ChangeShooterPowerCommand;
 import frc.robot.commands.DisableIntake;
 import frc.robot.commands.EnableIntakeShooterCommand;
 import frc.robot.commands.RunIntakeCommand;
@@ -53,6 +54,17 @@ public class RobotContainer {
 				new StraightDrive(driveSubsystem, 24, 0.3)
 			)
 		);
+	
+
+		
+	// commands for shooter power testing
+
+	private final ChangeShooterPowerCommand incrementShooterPowerCommand = new ChangeShooterPowerCommand(shooterSubsystem, 0.1);
+	private final ChangeShooterPowerCommand decrementShooterPowerCommand = new ChangeShooterPowerCommand(shooterSubsystem, -0.1);
+	
+
+
+
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**
@@ -105,14 +117,31 @@ public class RobotContainer {
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
 
-		// shooter power testing commands (for reference)
-		// buttonX.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.1));
-		// buttonY.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.1));
 	}
 
 	public EnableIntakeShooterCommand getEnableIntakeShooterCommand() {
 		return enableIntakeShooterCommand;
 	}
+	
+
+
+
+	// commands for shooter power testing
+
+	public int getDPadDirection() {
+		return driver.getPOV(Constants.DPAD);
+	}
+
+	public ChangeShooterPowerCommand getIncrementShooterPowerCommand() {
+		return incrementShooterPowerCommand;
+	}
+
+	public ChangeShooterPowerCommand getDecrementShooterPowerCommand() {
+		return decrementShooterPowerCommand;
+	}
+
+
+
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.

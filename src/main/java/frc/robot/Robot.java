@@ -21,6 +21,10 @@ public class Robot extends TimedRobot {
   private Command autonomousCommand;
   private Command enableShooterCommand;
 
+  // shooter power testing
+  private Command incrementShooterPowerCommand;
+  private Command decrementShooterPowerCommand;
+
   public static RobotContainer robotContainer;
 
   /**
@@ -94,6 +98,10 @@ public class Robot extends TimedRobot {
       autonomousCommand.cancel();
     }
 
+    // shooter power testing
+    incrementShooterPowerCommand = robotContainer.getIncrementShooterPowerCommand();
+    decrementShooterPowerCommand = robotContainer.getDecrementShooterPowerCommand();
+
 
     // used for testing ONLY
     // enableShooterCommand = robotContainer.getEnableIntakeShooterCommand();
@@ -109,6 +117,14 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
+    // shooter power testing
+    int dPadDirection = robotContainer.getDPadDirection();
+    if (dPadDirection == 0) {
+      incrementShooterPowerCommand.schedule();
+    } else if (dPadDirection == 180) {
+      decrementShooterPowerCommand.schedule();
+    }
+    
   }
 
   @Override
