@@ -23,6 +23,7 @@ public class ChangeShooterPowerCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		shooterSubsystem.setTargetPower(shooterSubsystem.getPower() + powerChange);
+		System.out.println("Running power to " + shooterSubsystem.getTargetPower());
 		shooterSubsystem.runShooterPower(shooterSubsystem.getTargetPower());
 	}
 
@@ -41,7 +42,17 @@ public class ChangeShooterPowerCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		return Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01;
+		if (Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01) {
+			if (powerChange > 0) {
+				System.out.println("Increased power to " + shooterSubsystem.getTargetPower());
+			} else {
+				System.out.println("Decreased power to " + shooterSubsystem.getTargetPower());
+			}
+			System.out.println();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
