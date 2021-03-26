@@ -44,6 +44,10 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 		intakeMotor.set(power);
 	}
 
+	public void runStorageMotor(double power) {
+		storageMotor.set(power);
+	}
+
 	public void deployIntake(double power) {
 		extendIntakePistons();
 		runIntakeMotor(power);
@@ -64,10 +68,6 @@ public class IntakeStorageSubsystem extends SubsystemBase {
 	public void retractIntakePistons() {
 		intakePistons.set(Value.kOff);
 		intakePistons.set(Value.kReverse);
-	}
-
-	public void runStorageMotor(double power) {
-		storageMotor.set(power);
 	}
 
 	public double getIntakeMotorPower() {

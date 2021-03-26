@@ -45,7 +45,8 @@ public final class Constants {
     public static final int BUTTON_B = 2;
     public static final int BUTTON_X = 3;
     public static final int BUTTON_Y = 4;
-    public static final int DPAD = 0;
+    public static final int LEFT_BUMPER = 5;
+    public static final int RIGHT_BUMPER = 6;
 
     public static final int SERVO_PORT = 0;
 

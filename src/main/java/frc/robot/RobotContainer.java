@@ -57,10 +57,6 @@ public class RobotContainer {
 	
 
 		
-	// commands for shooter power testing
-
-	private final ChangeShooterPowerCommand incrementShooterPowerCommand = new ChangeShooterPowerCommand(shooterSubsystem, 0.1);
-	private final ChangeShooterPowerCommand decrementShooterPowerCommand = new ChangeShooterPowerCommand(shooterSubsystem, -0.1);
 	
 
 
@@ -106,8 +102,8 @@ public class RobotContainer {
 		buttonB = new JoystickButton(driver, Constants.BUTTON_B); // B - stops shooter wheels
 		buttonX = new JoystickButton(driver, Constants.BUTTON_X); // X - runs intake system
 		buttonY = new JoystickButton(driver, Constants.BUTTON_Y); // Y - stops intake system
-		leftBumper = new JoystickButton(driver, 5);
-		rightBumper = new JoystickButton(driver, 6);
+		leftBumper = new JoystickButton(driver, Constants.LEFT_BUMPER); // left bumper - decreases speed/power
+		rightBumper = new JoystickButton(driver, Constants.RIGHT_BUMPER); // right bumper - increases speed/power
 
 		// Arcade Drive
 		wheel = new Joystick(Constants.WHEEL_PORT);
@@ -121,8 +117,10 @@ public class RobotContainer {
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
 
-		leftBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.1));
-		rightBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.1));
+
+		// shooter power testing
+		leftBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.05));
+		rightBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.05));
 		
 
 	}
@@ -131,23 +129,6 @@ public class RobotContainer {
 		return enableIntakeShooterCommand;
 	}
 	
-
-
-
-	// commands for shooter power testing
-
-	public int getDPadDirection() {
-		return driver.getPOV(Constants.DPAD);
-	}
-
-	public ChangeShooterPowerCommand getIncrementShooterPowerCommand() {
-		return incrementShooterPowerCommand;
-	}
-
-	public ChangeShooterPowerCommand getDecrementShooterPowerCommand() {
-		return decrementShooterPowerCommand;
-	}
-
 
 
 
