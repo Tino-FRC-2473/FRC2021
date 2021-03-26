@@ -23,13 +23,13 @@ public class RunShooterCommand extends CommandBase {
 		this.intakeStorageSubsystem = intakeStorageSubsystem;
 		this.status = status;
 		intakeTimer = new Timer();
-		intakeTimer.reset();
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
 		if (status) {
+			intakeTimer.reset();
 			intakeTimer.start();
 			intakeStorageSubsystem.runStorageMotor(-intakeStorageSubsystem.getTargetIntakeMotorPower());
 		} else {
@@ -40,7 +40,7 @@ public class RunShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if (intakeTimer.hasElapsed(2)) {
+		if (intakeTimer.hasElapsed(0.5)) {
 			intakeStorageSubsystem.runStorageMotor(0);
 			shooterSubsystem.runShooterPower(shooterSubsystem.getTargetPower());
 		}
