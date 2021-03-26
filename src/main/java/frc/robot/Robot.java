@@ -118,12 +118,12 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     // shooter power testing
-    int dPadDirection = robotContainer.getDPadDirection();
-    if (dPadDirection == 0) {
-      incrementShooterPowerCommand.schedule();
-    } else if (dPadDirection == 180) {
-      decrementShooterPowerCommand.schedule();
-    }
+    // int dPadDirection = robotContainer.getDPadDirection();
+    // if (dPadDirection == 0) {
+    //   incrementShooterPowerCommand.schedule();
+    // } else if (dPadDirection == 180) {
+    //   decrementShooterPowerCommand.schedule();
+    // }
     
   }
 

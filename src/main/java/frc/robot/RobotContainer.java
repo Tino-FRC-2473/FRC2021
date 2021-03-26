@@ -79,6 +79,8 @@ public class RobotContainer {
 	private JoystickButton buttonB;
 	private JoystickButton buttonX;
 	private JoystickButton buttonY;
+	private JoystickButton leftBumper;
+	private JoystickButton rightBumper;
 
 	// Arcade Drive
 	private Joystick wheel;
@@ -104,6 +106,8 @@ public class RobotContainer {
 		buttonB = new JoystickButton(driver, Constants.BUTTON_B); // B - stops shooter wheels
 		buttonX = new JoystickButton(driver, Constants.BUTTON_X); // X - runs intake system
 		buttonY = new JoystickButton(driver, Constants.BUTTON_Y); // Y - stops intake system
+		leftBumper = new JoystickButton(driver, 5);
+		rightBumper = new JoystickButton(driver, 6);
 
 		// Arcade Drive
 		wheel = new Joystick(Constants.WHEEL_PORT);
@@ -116,6 +120,10 @@ public class RobotContainer {
 
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
+
+		leftBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.1));
+		rightBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.1));
+		
 
 	}
 
