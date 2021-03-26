@@ -101,8 +101,9 @@ public class DriveSubsystem extends SubsystemBase {
         System.out.println("error: " + error + " heading: " + getHeading());
         double power = Math.max(Math.abs(error / 360), 0.2) * (error < 0 ? -1 : 1);
         System.out.println("Power for gyro turn: " + power);
+		double scalar = Math.min(1, Math.max(error / 45, 0.05));
         if(Math.abs(error) >= 2.0) {
-		    powerDrive(power, power);  
+		    powerDrive(power * scalar, power * scalar);  
         }
         return Math.abs(error) <= 2.0;
 	}
