@@ -45,8 +45,10 @@ public class ChangeShooterPowerCommand extends CommandBase {
 		if (Math.abs(shooterSubsystem.getPower() - shooterSubsystem.getTargetPower()) < 0.01) {
 			if (powerChange > 0) {
 				System.out.println("Increased power to " + shooterSubsystem.getTargetPower());
+				System.out.println("Current velocity: " + shooterSubsystem.getVelocity());
 			} else {
 				System.out.println("Decreased power to " + shooterSubsystem.getTargetPower());
+				System.out.println("Current velocity: " + shooterSubsystem.getVelocity());
 			}
 			System.out.println();
 			return true;
