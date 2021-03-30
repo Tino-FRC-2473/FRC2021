@@ -66,6 +66,29 @@ public class RobotContainer {
 			new StraightDrive(driveSubsystem, 67.1, 0.6),
             new TurnUsingGyro(driveSubsystem, 0)
 		);
+	private SequentialCommandGroup barrelPath = 
+		new SequentialCommandGroup (
+			new StraightDrive(driveSubsystem, 114, 0.6),
+			new TurnUsingGyro(driveSubsystem, -90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+			new TurnUsingGyro(driveSubsystem, -90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+			new TurnUsingGyro(driveSubsystem, -90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+			new StraightDrive(driveSubsystem, 198, 0.6), 
+			new TurnUsingGyro(driveSubsystem, -90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+			new TurnUsingGyro(driveSubsystem, -90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+			new TurnUsingGyro(driveSubsystem, -90),
+			new StraightDrive(driveSubsystem, 120, 0.6),
+			new TurnUsingGyro(driveSubsystem, 90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+			new TurnUsingGyro(driveSubsystem, 90),
+			new StraightDrive(driveSubsystem, 60, 0.6), 
+			new TurnUsingGyro(driveSubsystem, -90), 
+			new StraightDrive(driveSubsystem, 252, 0.6)
+		);
 	 private final Command autonomousCommand = slalomPath;
 	// new SequentialCommandGroup (
     //         new StraightDrive(driveSubsystem, 60, 0.6),
