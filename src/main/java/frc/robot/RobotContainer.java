@@ -101,11 +101,17 @@ public class RobotContainer {
 	 	new SequentialCommandGroup(
 	 		new ParallelCommandGroup (
 				new EnableIntake(intakeStorageSubsystem),
-				new CVDriveCommand(driveSubsystem)
+				new StraightDrive(driveSubsystem, 120.0, 0.6),
+                new TurnUsingGyro(driveSubsystem, 45),
+                new StraightDrive(driveSubsystem, 84.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, -45),
+                new StraightDrive(driveSubsystem, 84.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, 0)
 			),
 		 	new DisableIntake(intakeStorageSubsystem)
 		 );
-	 
+	 //				new CVDriveCommand(driveSubsystem)
+
 	// new SequentialCommandGroup (
     //         new StraightDrive(driveSubsystem, 60, 0.6),
     //         new TurnUsingGyro(driveSubsystem, -26.6),
