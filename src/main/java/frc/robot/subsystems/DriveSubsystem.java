@@ -100,7 +100,7 @@ public class DriveSubsystem extends SubsystemBase {
 		double error = targetAngleDeg - getHeading();
         System.out.println("error: " + error + " heading: " + getHeading());
         double power = Math.max(Math.abs(error / 360), 0.2) * (error < 0 ? -1 : 1);
-		double scalar = Math.min(1, Math.max(error / 45, 0.15));
+		double scalar = Math.min(1, Math.max(error / 45, 0.5));
 		System.out.println("Power for gyro turn: " + power * scalar);
 
         if(Math.abs(error) >= 2.0) {
