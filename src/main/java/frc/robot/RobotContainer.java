@@ -89,7 +89,8 @@ public class RobotContainer {
 			new TurnUsingGyro(driveSubsystem, -90), 
 			new StraightDrive(driveSubsystem, 252, 0.6)
 		);
-	 private final Command autonomousCommand = slalomPath;
+	 private final Command autonomousCommand = 	new CVDriveCommand(driveSubsystem);
+	 
 	// new SequentialCommandGroup (
     //         new StraightDrive(driveSubsystem, 60, 0.6),
     //         new TurnUsingGyro(driveSubsystem, -26.6),
@@ -98,7 +99,6 @@ public class RobotContainer {
     //         new StraightDrive(driveSubsystem, 94.9, 0.6),
     //         new TurnUsingGyro(driveSubsystem, 0)
     //     );
-	//new CVDriveCommand(driveSubsystem);
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**
