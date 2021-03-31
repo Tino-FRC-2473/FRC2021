@@ -21,6 +21,7 @@ public class CVDriveCommand extends SequentialCommandGroup {
 
     public CVDriveCommand(DriveSubsystem subsystem) {
 
+        driveSubsystem = subsystem;
         addRequirements(subsystem);
 
         RedPathA = 
