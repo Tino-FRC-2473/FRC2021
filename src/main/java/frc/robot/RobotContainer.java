@@ -22,7 +22,10 @@ import frc.robot.commands.ChangeShooterPowerCommand;
 import frc.robot.commands.DisableIntake;
 import frc.robot.commands.EnableIntakeShooterCommand;
 import frc.robot.commands.RunIntakeCommand;
-import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.RunShooterToPowerCommand;
+import frc.robot.commands.RunShooterToRPMCommand;
+import frc.robot.commands.ChangeShooterRPMCommand;
+
 // Subsystems
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeStorageSubsystem;
@@ -111,16 +114,16 @@ public class RobotContainer {
 		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
 
 
-		buttonA.whenPressed(new RunShooterCommand(shooterSubsystem, intakeStorageSubsystem, true));
-		buttonB.whenPressed(new RunShooterCommand(shooterSubsystem, intakeStorageSubsystem, false));
+		buttonA.whenPressed(new RunShooterToRPMCommand(shooterSubsystem, intakeStorageSubsystem, true));
+		buttonB.whenPressed(new RunShooterToRPMCommand(shooterSubsystem, intakeStorageSubsystem, false));
 
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
 
 
 		// shooter power testing
-		leftBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.05));
-		rightBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.05));
+		leftBumper.whenPressed(new ChangeShooterRPMCommand(shooterSubsystem, -50));
+		rightBumper.whenPressed(new ChangeShooterRPMCommand(shooterSubsystem, 50));
 		
 
 	}

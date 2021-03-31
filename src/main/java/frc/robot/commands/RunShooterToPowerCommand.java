@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class RunShooterCommand extends CommandBase {
+public class RunShooterToPowerCommand extends CommandBase {
 
 	private final ShooterSubsystem shooterSubsystem;
 	private final IntakeStorageSubsystem intakeStorageSubsystem;
@@ -18,7 +18,7 @@ public class RunShooterCommand extends CommandBase {
 	 *
 	 * @param subsystem The subsystem used by this command.
 	 */
-	public RunShooterCommand(ShooterSubsystem shooterSubsystem, IntakeStorageSubsystem intakeStorageSubsystem, boolean status) {
+	public RunShooterToPowerCommand(ShooterSubsystem shooterSubsystem, IntakeStorageSubsystem intakeStorageSubsystem, boolean status) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.intakeStorageSubsystem = intakeStorageSubsystem;
 		this.status = status;

@@ -17,6 +17,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	private CANSparkMax leftShooterMotor;
 	private CANSparkMax rightShooterMotor;
 	private double targetPower;
+	private double targetVelocity;
 
  	/** Creates a new ShooterSubsystem. */
 	public ShooterSubsystem() {
@@ -25,6 +26,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		rightShooterMotor = new CANSparkMax(ShooterConstants.SPARK_SHOOTER_RIGHT, MotorType.kBrushless);
 
 		targetPower = 0.4;
+		targetVelocity = 5900;
 		leftShooterMotor.set(0); // on init, set power to 0
 		rightShooterMotor.set(0);
 
@@ -64,5 +66,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
 	public void setTargetPower(double targetPower) {
 		this.targetPower = targetPower;
+	}
+
+	public double getTargetVelocity() {
+		return targetVelocity;
+	}
+
+	public void setTargetVelocity(double targetVelocity) {
+		this.targetVelocity = targetVelocity;
 	}
 }
