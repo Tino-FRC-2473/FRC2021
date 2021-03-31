@@ -98,10 +98,12 @@ public class RobotContainer {
 			new StraightDrive(driveSubsystem, 252, 0.6)
 		);
 	 private final Command autonomousCommand = 	
-	 	new ParallelCommandGroup (
-			 new EnableIntake(intakeStorageSubsystem),
-			 new CVDriveCommand(driveSubsystem),
-			 new DisableIntake(intakeStorageSubsystem)
+	 	new SequentialCommandGroup(
+	 		new ParallelCommandGroup (
+				new EnableIntake(intakeStorageSubsystem),
+				new CVDriveCommand(driveSubsystem)
+			),
+		 	new DisableIntake(intakeStorageSubsystem)
 		 );
 	 
 	// new SequentialCommandGroup (

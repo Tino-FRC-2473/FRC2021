@@ -83,7 +83,7 @@ public class CVDriveCommand extends SequentialCommandGroup {
 
     @Override
     public void execute() {
-       isFinished = path.isFinished();
+       
     }
 
     @Override
