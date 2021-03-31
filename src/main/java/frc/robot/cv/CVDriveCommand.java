@@ -71,13 +71,41 @@ public class CVDriveCommand extends SequentialCommandGroup {
         cvData = Robot.getCVData();
         System.out.println("Path: " + (cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
        if(cvData.isRedPath() && cvData.isPathA()) {
-            addCommands(RedPathA);
+           //red path a
+            addCommands(
+                new StraightDrive(driveSubsystem, 60, 0.6),
+                new TurnUsingGyro(driveSubsystem, -26.6),
+                new StraightDrive(driveSubsystem, 67.1, 0.6),
+                new TurnUsingGyro(driveSubsystem, 71.6),
+                new StraightDrive(driveSubsystem, 94.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, 0));
        }else if(cvData.isRedPath() && !cvData.isPathA()) {
-            addCommands(RedPathB);
+           //red path b
+            addCommands(
+                new StraightDrive(driveSubsystem, 60, 0.6),
+                new TurnUsingGyro(driveSubsystem, -45),
+                new StraightDrive(driveSubsystem, 84.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, 45),
+                new StraightDrive(driveSubsystem, 84.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, 0));
        }else if(!cvData.isRedPath() && cvData.isPathA()) {
-            addCommands(BluePathA);
+           //blue path a
+            addCommands(
+                new StraightDrive(driveSubsystem, 150.0, 0.6),
+                new TurnUsingGyro(driveSubsystem, 71.6),
+                new StraightDrive(driveSubsystem, 94.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, -26.6),
+                new StraightDrive(driveSubsystem, 67.1, 0.6),
+                new TurnUsingGyro(driveSubsystem, 0));
        }else {
-            addCommands(BluePathB);
+           //blue path b
+            addCommands(
+                new StraightDrive(driveSubsystem, 120.0, 0.6),
+                new TurnUsingGyro(driveSubsystem, 45),
+                new StraightDrive(driveSubsystem, 84.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, -45),
+                new StraightDrive(driveSubsystem, 84.9, 0.6),
+                new TurnUsingGyro(driveSubsystem, 0));
        }
        System.out.println("Path added");
     }
