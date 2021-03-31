@@ -47,4 +47,12 @@ public final class Constants {
     public static final int BUTTON_Y = 4;
 
     public static final int SERVO_PORT = 0;
+
+    public static final class IntakeStorageConstants {
+		public static final int SPARK_INTAKE = 10;
+		public static final int SPARK_STORAGE = 8;
+
+		public static final int INTAKE_PISTON_FORWARD_PORT = 6;
+		public static final int INTAKE_PISTON_REVERSE_PORT = 1;
+    }
 }

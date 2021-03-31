@@ -11,12 +11,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.StraightLineAuto;
+import frc.robot.commands.EnableIntake;
 import frc.robot.commands.RedPathB;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
+import frc.robot.commands.DisableIntake;
 import frc.robot.cv.CVDriveCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeStorageSubsystem;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -29,6 +35,8 @@ public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
+
 	private SequentialCommandGroup slalomPath =
 		new SequentialCommandGroup (
 			new TurnUsingGyro(driveSubsystem, 45),
@@ -89,7 +97,12 @@ public class RobotContainer {
 			new TurnUsingGyro(driveSubsystem, -90), 
 			new StraightDrive(driveSubsystem, 252, 0.6)
 		);
-	 private final Command autonomousCommand = 	new CVDriveCommand(driveSubsystem);
+	 private final Command autonomousCommand = 	
+	 	new ParallelCommandGroup (
+			 new EnableIntake(intakeStorageSubsystem),
+			 new CVDriveCommand(driveSubsystem),
+			 new DisableIntake(intakeStorageSubsystem)
+		 );
 	 
 	// new SequentialCommandGroup (
     //         new StraightDrive(driveSubsystem, 60, 0.6),
