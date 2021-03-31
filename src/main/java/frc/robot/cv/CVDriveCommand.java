@@ -79,6 +79,7 @@ public class CVDriveCommand extends SequentialCommandGroup {
        }else {
             addCommands(BluePathB);
        }
+       System.out.println("Path added");
     }
 
     @Override
