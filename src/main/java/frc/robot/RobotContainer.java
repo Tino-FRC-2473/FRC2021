@@ -99,7 +99,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		driver = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-		// Tank Drive
+
 		joystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
 		buttonA = new JoystickButton(driver, Constants.BUTTON_A); // A - runs shooter wheels + intake back up
 		buttonB = new JoystickButton(driver, Constants.BUTTON_B); // B - stops shooter wheels
@@ -108,10 +108,10 @@ public class RobotContainer {
 		leftBumper = new JoystickButton(driver, Constants.LEFT_BUMPER); // left bumper - decreases speed/power
 		rightBumper = new JoystickButton(driver, Constants.RIGHT_BUMPER); // right bumper - increases speed/power
 
-		// Arcade Drive
-		wheel = new Joystick(Constants.WHEEL_PORT);
-		throttle = new Joystick(Constants.THROTTLE_PORT);
-		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
+		// // Arcade Drive
+		// wheel = new Joystick(Constants.WHEEL_PORT);
+		// throttle = new Joystick(Constants.THROTTLE_PORT);
+		// buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
 
 
 		buttonA.whenPressed(new RunShooterToRPMCommand(shooterSubsystem, intakeStorageSubsystem, true));
@@ -204,13 +204,5 @@ public class RobotContainer {
 
 	public double getRightY() {
 		return driver.getY(GenericHID.Hand.kRight);
-	}
-
-	public double getZ() {
-		return getThrottle().getZ();
-	}
-
-	public double getX() {
-		return getWheel().getX();
 	}
 }
