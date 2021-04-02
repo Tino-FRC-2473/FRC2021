@@ -99,7 +99,7 @@ public class DriveSubsystem extends SubsystemBase {
 	public boolean gyroTurn(double targetAngleDeg) {
 		double error = targetAngleDeg - getHeading();
         System.out.println("error: " + error + " heading: " + getHeading());
-        double power = Math.min(0.3, Math.max(Math.abs(error / 100), 0.1)) * (error < 0 ? -1 : 1);
+        double power = Math.min(0.2, Math.max(Math.abs(error / 100), 0.1)) * (error < 0 ? -1 : 1);
 		//double scalar = Math.min(1, Math.max(Math.abs(error / 45), 0.5));
 		System.out.println("Power for gyro turn: " + power);
 
@@ -124,7 +124,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void tankDrive(){
-		differentialDrive.tankDrive(Robot.robotContainer.getLeftY(), Robot.robotContainer.getRightY(), true);
+		differentialDrive.tankDrive(Robot.robotContainer.getLeftY() * 0.5, Robot.robotContainer.getRightY() * 0.5, true);
 
 	}
 
