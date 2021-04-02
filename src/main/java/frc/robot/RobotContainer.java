@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeStorageSubsystem;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants;
 
 
 
@@ -155,42 +156,43 @@ public class RobotContainer {
 			//red path a
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 60, 0.6),
+				 new StraightDrive(driveSubsystem, 60, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -26.6),
-				 new StraightDrive(driveSubsystem, 67.1, 0.6),
+				 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 71.6),
-				 new StraightDrive(driveSubsystem, 94.9, 0.6),
+				 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 0));
 		}else if(isRedPath && !isPathA) {
 			//red path b
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 60, 0.6),
+				 new StraightDrive(driveSubsystem, 60, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -45),
-				 new StraightDrive(driveSubsystem, 84.9, 0.6),
+				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 45),
-				 new StraightDrive(driveSubsystem, 84.9, 0.6),
+				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 0));
 		}else if(!isRedPath && isPathA) {
 			//blue path a
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 150.0, 0.6),
+				 new StraightDrive(driveSubsystem, 174.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 71.6),
-				 new StraightDrive(driveSubsystem, 94.9, 0.6),
+				 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -26.6),
-				 new StraightDrive(driveSubsystem, 67.1, 0.6),
+				 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 0));
 		}else {
 			//blue path b
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 120.0, 0.4),
+				 new StraightDrive(driveSubsystem, 144.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 45),
-				 new StraightDrive(driveSubsystem, 84.9, 0.4),
+				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -45),
-				 new StraightDrive(driveSubsystem, 84.9, 0.4),
-				 new TurnUsingGyro(driveSubsystem, 0));
+				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+				 new TurnUsingGyro(driveSubsystem, 0),
+				 new StraightDrive(driveSubsystem, 30, Constants.AUTO_STRAIGHT_DRIVE_POWER));
 		}
 
 		return autonomousCommand; 
