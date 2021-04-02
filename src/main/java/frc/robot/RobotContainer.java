@@ -156,29 +156,29 @@ public class RobotContainer {
 			//red path a
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 72, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+				 new StraightDrive(driveSubsystem, 80, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -26.6),
 				 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 71.6),
 				 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 0),
-				 new StraightDrive(driveSubsystem, 150, Constants.AUTO_STRAIGHT_DRIVE_POWER));
+				 new StraightDrive(driveSubsystem, 186, Constants.AUTO_STRAIGHT_DRIVE_POWER));
 		}else if(isRedPath && !isPathA) {
 			//red path b
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 72, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+				 new StraightDrive(driveSubsystem, 80, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -45),
 				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 45),
 				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 0),
-				 new StraightDrive(driveSubsystem, 120, Constants.AUTO_STRAIGHT_DRIVE_POWER));
+				 new StraightDrive(driveSubsystem, 156, Constants.AUTO_STRAIGHT_DRIVE_POWER));
 		}else if(!isRedPath && isPathA) {
 			//blue path a
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 170.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+				 new StraightDrive(driveSubsystem, 176.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 71.6),
 				 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -26.6),
