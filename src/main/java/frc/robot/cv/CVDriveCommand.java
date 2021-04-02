@@ -4,24 +4,26 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.cv.Jetson;
 import frc.robot.Robot;
 
 public class CVDriveCommand extends SequentialCommandGroup {
 
     DriveSubsystem driveSubsystem;
-    CVData cvData;
     SequentialCommandGroup path;
     private boolean isFinished = false;
     SequentialCommandGroup RedPathA;
     SequentialCommandGroup RedPathB;
     SequentialCommandGroup BluePathA ;
     SequentialCommandGroup BluePathB;
+    Jetson jetson;
   
 
 
-    public CVDriveCommand(DriveSubsystem subsystem) {
+    public CVDriveCommand(DriveSubsystem subsystem, Jetson jetson) {
 
         driveSubsystem = subsystem;
+        this.jetson = jetson;
         addRequirements(subsystem);
 
         RedPathA = 
@@ -68,7 +70,8 @@ public class CVDriveCommand extends SequentialCommandGroup {
 
     @Override
     public void initialize() { 
-        cvData = Robot.getCVData();
+        //cvData = Robot.getCVData();
+        /*
         System.out.println("Path: " + (cvData.isRedPath() ? "Red " : "Blue ") + (cvData.isPathA() ? "A" : "B"));
        if(cvData.isRedPath() && cvData.isPathA()) {
            //red path a
@@ -107,20 +110,7 @@ public class CVDriveCommand extends SequentialCommandGroup {
                 new StraightDrive(driveSubsystem, 84.9, 0.6),
                 new TurnUsingGyro(driveSubsystem, 0));
        }
+       */
        System.out.println("Path added");
     }
-
-    // @Override
-    // public void execute() {
-       
-    // }
-
-    // @Override
-    // public void end(boolean interrupted) {
-    // }
-
-    // @Override
-    // public boolean isFinished() {
-    //     return this.isFinished;
-    // }
 }

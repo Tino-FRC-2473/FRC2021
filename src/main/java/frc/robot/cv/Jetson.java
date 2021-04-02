@@ -36,11 +36,10 @@ public class Jetson extends SerialPort {
 			}
 		}
 	}
-
-	public CVData getCVData() {
-		//not sure if it is necessary to update the vision here if I am also
-		//updating it on autonomous init
-		updateVision();
-		return new CVData(isRedPath, isPathA);
+	public boolean isRedPath() {
+		return this.isRedPath;
+	}
+	public boolean isPathA() {
+		return this.isPathA;
 	}
 }

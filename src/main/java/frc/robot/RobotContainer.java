@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.EnableIntake;
-import frc.robot.commands.RedPathB;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
 import frc.robot.commands.DisableIntake;
@@ -97,32 +96,7 @@ public class RobotContainer {
 			new TurnUsingGyro(driveSubsystem, -90), 
 			new StraightDrive(driveSubsystem, 252, 0.6)
 		);
-	 private final Command autonomousCommand = 	
-	 	new SequentialCommandGroup(
-	 		new ParallelCommandGroup (
-				new EnableIntake(intakeStorageSubsystem),
-				new SequentialCommandGroup(
-					new StraightDrive(driveSubsystem, 120.0, 0.6),
-					new TurnUsingGyro(driveSubsystem, 45),
-					new StraightDrive(driveSubsystem, 84.9, 0.6),
-					new TurnUsingGyro(driveSubsystem, -45),
-					new StraightDrive(driveSubsystem, 84.9, 0.6),
-					new TurnUsingGyro(driveSubsystem, 0)
-				)
-			),
-		 	new DisableIntake(intakeStorageSubsystem)
-		 );
-	 //				new CVDriveCommand(driveSubsystem)
 
-	// new SequentialCommandGroup (
-    //         new StraightDrive(driveSubsystem, 60, 0.6),
-    //         new TurnUsingGyro(driveSubsystem, -26.6),
-    //         new StraightDrive(driveSubsystem, 67.1, 0.6),
-    //         new TurnUsingGyro(driveSubsystem, 71.6),
-    //         new StraightDrive(driveSubsystem, 94.9, 0.6),
-    //         new TurnUsingGyro(driveSubsystem, 0)
-    //     );
-	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -146,6 +120,9 @@ public class RobotContainer {
 		System.out.println("Creating the auto command in robot container");
 		configureButtonBindings();
 	}
+
+	private Command autonomousCommand;	
+
 
 	/**
 	 * Use this method to define your button->command mappings. Buttons can be
@@ -173,10 +150,54 @@ public class RobotContainer {
 	 *
 	 * @return the command to run in autonomous
 	 */
-	public Command getAutonomousCommand() {
-		// An ExampleCommand will run in autonomous
+	public Command getAutonomousCommand(boolean isRedPath, boolean isPathA) {
+		if(isRedPath && isPathA) {
+			//red path a
+			autonomousCommand = new SequentialCommandGroup(
+				new EnableIntake(intakeStorageSubsystem),
+				 new StraightDrive(driveSubsystem, 60, 0.6),
+				 new TurnUsingGyro(driveSubsystem, -26.6),
+				 new StraightDrive(driveSubsystem, 67.1, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 71.6),
+				 new StraightDrive(driveSubsystem, 94.9, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 0));
+		}else if(isRedPath && !isPathA) {
+			//red path b
+			autonomousCommand = new SequentialCommandGroup(
+				new EnableIntake(intakeStorageSubsystem),
+				 new StraightDrive(driveSubsystem, 60, 0.6),
+				 new TurnUsingGyro(driveSubsystem, -45),
+				 new StraightDrive(driveSubsystem, 84.9, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 45),
+				 new StraightDrive(driveSubsystem, 84.9, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 0));
+		}else if(!isRedPath && isPathA) {
+			//blue path a
+			autonomousCommand = new SequentialCommandGroup(
+				new EnableIntake(intakeStorageSubsystem),
+				 new StraightDrive(driveSubsystem, 150.0, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 71.6),
+				 new StraightDrive(driveSubsystem, 94.9, 0.6),
+				 new TurnUsingGyro(driveSubsystem, -26.6),
+				 new StraightDrive(driveSubsystem, 67.1, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 0));
+		}else {
+			//blue path b
+			autonomousCommand = new SequentialCommandGroup(
+				new EnableIntake(intakeStorageSubsystem),
+				 new StraightDrive(driveSubsystem, 120.0, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 45),
+				 new StraightDrive(driveSubsystem, 84.9, 0.6),
+				 new TurnUsingGyro(driveSubsystem, -45),
+				 new StraightDrive(driveSubsystem, 84.9, 0.6),
+				 new TurnUsingGyro(driveSubsystem, 0));
+		}
 
 		return autonomousCommand; 
+	}
+
+	public Command getDisableRobotCommand() {
+		return new DisableIntake(intakeStorageSubsystem);
 	}
 
 	// public XboxController getDriver() {
