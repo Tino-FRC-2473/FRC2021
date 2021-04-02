@@ -189,7 +189,7 @@ public class RobotContainer {
 			//blue path b
 			autonomousCommand = new SequentialCommandGroup(
 				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 144.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+				 new StraightDrive(driveSubsystem, 162.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, 45),
 				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
 				 new TurnUsingGyro(driveSubsystem, -45),
