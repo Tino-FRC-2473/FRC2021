@@ -122,7 +122,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void tankDrive(){
-		differentialDrive.tankDrive(Robot.robotContainer.getLeftY() * 0.5, Robot.robotContainer.getRightY() * 0.5, false) ;
+		differentialDrive.tankDrive(Robot.robotContainer.getLeftY() * 0.4, Robot.robotContainer.getRightY() * 0.4, false) ;
 
 	}
 
