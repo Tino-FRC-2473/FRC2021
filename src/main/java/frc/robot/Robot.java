@@ -83,9 +83,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 
-		jetson.updateVision();
+		//jetson.updateVision();
 
-		m_autonomousCommand = robotContainer.getAutonomousCommand(jetson.isRedPath(), jetson.isPathA());
+		//m_autonomousCommand = robotContainer.getAutonomousCommand(jetson.isRedPath(), jetson.isPathA());
+		m_autonomousCommand = robotContainer.getAutonomousCommand(true, true);
 		robotContainer.driveSubsystem.resetGyro();
 
 

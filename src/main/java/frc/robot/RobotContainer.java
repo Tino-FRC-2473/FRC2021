@@ -39,8 +39,9 @@ public class RobotContainer {
 
 	private SequentialCommandGroup slalomPath =
 		new SequentialCommandGroup (
-			new TurnUsingGyro(driveSubsystem, 45),
-			new StraightDrive(driveSubsystem, 84.9, 0.6),
+			new StraightDrive(driveSubsystem, 30, 0.6),
+			new TurnUsingGyro(driveSubsystem, -63.4),
+			new StraightDrive(driveSubsystem, 67, 0.6),
             new TurnUsingGyro(driveSubsystem, 0),
             new StraightDrive(driveSubsystem, 120, 0.6),
             new TurnUsingGyro(driveSubsystem, -45),
@@ -152,53 +153,54 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand(boolean isRedPath, boolean isPathA) {
-		if(isRedPath && isPathA) {
-			//red path a
-			autonomousCommand = new SequentialCommandGroup(
-				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 80, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, -26.6),
-				 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 71.6),
-				 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 0),
-				 new StraightDrive(driveSubsystem, 186, Constants.AUTO_STRAIGHT_DRIVE_POWER));
-		}else if(isRedPath && !isPathA) {
-			//red path b
-			autonomousCommand = new SequentialCommandGroup(
-				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 80, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, -45),
-				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 45),
-				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 0),
-				 new StraightDrive(driveSubsystem, 156, Constants.AUTO_STRAIGHT_DRIVE_POWER));
-		}else if(!isRedPath && isPathA) {
-			//blue path a
-			autonomousCommand = new SequentialCommandGroup(
-				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 176.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 71.6),
-				 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, -26.6),
-				 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 0),
-				 new StraightDrive(driveSubsystem, 66, Constants.AUTO_STRAIGHT_DRIVE_POWER));
-		}else {
-			//blue path b
-			autonomousCommand = new SequentialCommandGroup(
-				new EnableIntake(intakeStorageSubsystem),
-				 new StraightDrive(driveSubsystem, 170.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 45),
-				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, -45),
-				 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
-				 new TurnUsingGyro(driveSubsystem, 0),
-				 new StraightDrive(driveSubsystem, 66, Constants.AUTO_STRAIGHT_DRIVE_POWER));
-		}
+		return slalomPath;
+		// if(isRedPath && isPathA) {
+		// 	//red path a
+		// 	autonomousCommand = new SequentialCommandGroup(
+		// 		new EnableIntake(intakeStorageSubsystem),
+		// 		 new StraightDrive(driveSubsystem, 80, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, -26.6),
+		// 		 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 71.6),
+		// 		 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 0),
+		// 		 new StraightDrive(driveSubsystem, 186, Constants.AUTO_STRAIGHT_DRIVE_POWER));
+		// }else if(isRedPath && !isPathA) {
+		// 	//red path b
+		// 	autonomousCommand = new SequentialCommandGroup(
+		// 		new EnableIntake(intakeStorageSubsystem),
+		// 		 new StraightDrive(driveSubsystem, 80, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, -45),
+		// 		 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 45),
+		// 		 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 0),
+		// 		 new StraightDrive(driveSubsystem, 156, Constants.AUTO_STRAIGHT_DRIVE_POWER));
+		// }else if(!isRedPath && isPathA) {
+		// 	//blue path a
+		// 	autonomousCommand = new SequentialCommandGroup(
+		// 		new EnableIntake(intakeStorageSubsystem),
+		// 		 new StraightDrive(driveSubsystem, 176.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 71.6),
+		// 		 new StraightDrive(driveSubsystem, 94.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, -26.6),
+		// 		 new StraightDrive(driveSubsystem, 67.1, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 0),
+		// 		 new StraightDrive(driveSubsystem, 66, Constants.AUTO_STRAIGHT_DRIVE_POWER));
+		// }else {
+		// 	//blue path b
+		// 	autonomousCommand = new SequentialCommandGroup(
+		// 		new EnableIntake(intakeStorageSubsystem),
+		// 		 new StraightDrive(driveSubsystem, 170.0, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 45),
+		// 		 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, -45),
+		// 		 new StraightDrive(driveSubsystem, 84.9, Constants.AUTO_STRAIGHT_DRIVE_POWER),
+		// 		 new TurnUsingGyro(driveSubsystem, 0),
+		// 		 new StraightDrive(driveSubsystem, 66, Constants.AUTO_STRAIGHT_DRIVE_POWER));
+		// }
 
-		return autonomousCommand; 
+		//return autonomousCommand; 
 	}
 
 	public Command getDisableRobotCommand() {
