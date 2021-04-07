@@ -39,9 +39,9 @@ public class RobotContainer {
 
 	private SequentialCommandGroup slalomPath =
 		new SequentialCommandGroup (
-			new StraightDrive(driveSubsystem, 30, 0.6),
-			new TurnUsingGyro(driveSubsystem, -63.4),
-			new StraightDrive(driveSubsystem, 67, 0.6),
+			new StraightDrive(driveSubsystem, 12, 0.6),
+			new TurnUsingGyro(driveSubsystem, 45),
+			new StraightDrive(driveSubsystem, 84.9, 0.6),
             new TurnUsingGyro(driveSubsystem, 0),
             new StraightDrive(driveSubsystem, 120, 0.6),
             new TurnUsingGyro(driveSubsystem, -45),
@@ -57,24 +57,47 @@ public class RobotContainer {
             new TurnUsingGyro(driveSubsystem, 135),
             new StraightDrive(driveSubsystem, 84.9, 0.6)
 		);
-	private SequentialCommandGroup bouncePath = 
+		private SequentialCommandGroup bouncePathSafe= 
 		new SequentialCommandGroup (
-			new TurnUsingGyro(driveSubsystem, 63.4),
-			new StraightDrive(driveSubsystem, 67.1, 0.6),
-            new TurnUsingGyro(driveSubsystem, -63.4),
-            new StraightDrive(driveSubsystem, 134.2, 0.6),
-            new TurnUsingGyro(driveSubsystem, 76.0),
-            new StraightDrive(driveSubsystem, 123.7, 0.6),
-            new TurnUsingGyro(driveSubsystem, -76.0),
-			new StraightDrive(driveSubsystem, 123.7, 0.6),
+			new StraightDrive(driveSubsystem, 42, 0.6),
+			new TurnUsingGyro(driveSubsystem, 90),
+			new StraightDrive(driveSubsystem, 60, 0.6),
+            new TurnUsingGyro(driveSubsystem, -90),
+            new StraightDrive(driveSubsystem, 60, 0.6),
+            new TurnUsingGyro(driveSubsystem, -45),
+            new StraightDrive(driveSubsystem, 84.9, 0.6),
             new TurnUsingGyro(driveSubsystem, 0),
-            new StraightDrive(driveSubsystem, 30, 0.6),
-            new TurnUsingGyro(driveSubsystem, 76.0),
-            new StraightDrive(driveSubsystem, 123.7, 0.6),
-            new TurnUsingGyro(driveSubsystem, -63.4),
-			new StraightDrive(driveSubsystem, 67.1, 0.6),
-            new TurnUsingGyro(driveSubsystem, 0)
+			new StraightDrive(driveSubsystem, 30, 0.6),
+            new TurnUsingGyro(driveSubsystem, 90),
+            new StraightDrive(driveSubsystem, 120, 0.6),
+            new TurnUsingGyro(driveSubsystem, -90),
+            new StraightDrive(driveSubsystem, 120, 0.6),
+            new TurnUsingGyro(driveSubsystem, 0),
+			new StraightDrive(driveSubsystem, 90, 0.6),
+            new TurnUsingGyro(driveSubsystem, 90),
+			new StraightDrive(driveSubsystem, 120, 0.6),
+            new TurnUsingGyro(driveSubsystem, -71.6),
+			new StraightDrive(driveSubsystem, 70.9, 0.6)
 		);
+	// private SequentialCommandGroup bouncePathRisky = 
+	// 	new SequentialCommandGroup (
+	// 		new StraightDrive(driveSubsystem, 12, 0.6),
+	// 		new TurnUsingGyro(driveSubsystem, 63.4),
+	// 		new StraightDrive(driveSubsystem, 67.1, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, -63.4),
+    //         new StraightDrive(driveSubsystem, 134.2, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, 76.0),
+    //         new StraightDrive(driveSubsystem, 123.7, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, -76.0),
+	// 		new StraightDrive(driveSubsystem, 123.7, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, 0),
+    //         new StraightDrive(driveSubsystem, 30, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, 76.0),
+    //         new StraightDrive(driveSubsystem, 123.7, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, -63.4),
+	// 		new StraightDrive(driveSubsystem, 67.1, 0.6),
+    //         new TurnUsingGyro(driveSubsystem, 0)
+	// 	);
 	private SequentialCommandGroup barrelPath = 
 		new SequentialCommandGroup (
 			new StraightDrive(driveSubsystem, 114, 0.6),
