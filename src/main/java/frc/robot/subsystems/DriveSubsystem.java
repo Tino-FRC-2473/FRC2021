@@ -84,7 +84,7 @@ public class DriveSubsystem extends SubsystemBase {
         System.out.println("error: " + error + "  leftPower: " + adjustedLeftPower + " rightPower:" + adjustedRightPower + "  distanceToTarget: " + distanceToTarget);
 		//the scalar slows down the robot as it gets closer to the goal,
 		//while ensuring that it doesn't slow the robot down too much (keeps scalar between 1 and 0.1)
-		double scalar = 1; //Math.min(1, Math.max(Math.atan(distanceToTarget / 4) * 2 / Math.PI, 0.1));
+		double scalar = Math.min(1, Math.max(distanceToTarget / 24, 0.05)); //Math.min(1, Math.max(Math.atan(distanceToTarget / 4) * 2 / Math.PI, 0.1));
 		//checks whether the robot has arrived at its destination
 		if ((power > 0 && position < endPositionTick) || (power < 0 && position > endPositionTick)) {
         	powerDrive(-adjustedLeftPower * scalar, adjustedRightPower * scalar);
@@ -99,8 +99,10 @@ public class DriveSubsystem extends SubsystemBase {
 	public boolean gyroTurn(double targetAngleDeg) {
 		double error = targetAngleDeg - getHeading();
         System.out.println("error: " + error + " heading: " + getHeading());
-        double power = Math.max(Math.abs(error / 360), 0.2) * (error < 0 ? -1 : 1);
-        System.out.println("Power for gyro turn: " + power);
+        double power = Math.min(0.2, Math.max(Math.abs(error / 100), 0.1)) * (error < 0 ? -1 : 1);
+		//double scalar = Math.min(1, Math.max(Math.abs(error / 45), 0.5));
+		System.out.println("Power for gyro turn: " + power);
+
         if(Math.abs(error) >= 2.0) {
 		    powerDrive(power, power);  
         }
@@ -122,7 +124,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void tankDrive(){
-		differentialDrive.tankDrive(Robot.robotContainer.getLeftY(), Robot.robotContainer.getRightY(), true) ;
+		differentialDrive.tankDrive(Robot.robotContainer.getLeftY() * 0.5, Robot.robotContainer.getRightY() * 0.5, true);
 
 	}
 
