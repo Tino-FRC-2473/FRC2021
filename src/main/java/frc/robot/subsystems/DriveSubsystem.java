@@ -128,7 +128,7 @@ public class DriveSubsystem extends SubsystemBase {
 			leftPower = (leftPower + rightPower) / 2;
 			rightPower = leftPower;
 		}
-		differentialDrive.tankDrive(leftPower * 0.4, rightPower * 0.4, false) ;
+		differentialDrive.tankDrive(leftPower * 0.6, rightPower * 0.6, false) ;
 
 	}
 
