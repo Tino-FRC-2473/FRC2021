@@ -115,6 +115,7 @@ public class RobotContainer {
 
 
 		buttonA.whenPressed(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, true));
+		buttonA.whenReleased(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, false));
 		buttonB.whenPressed(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, false));
 
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
