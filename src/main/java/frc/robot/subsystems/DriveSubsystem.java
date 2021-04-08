@@ -133,8 +133,11 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void arcadeDrive() {
+		double rightX = -Robot.robotContainer.getRightX();
+		double leftY = Robot.robotContainer.getLeftY();
+		System.out.println("RightX : " + rightX + "   leftY: " + leftY);
 		//differentialDrive.arcadeDrive(Robot.robotContainer.getLeftY() * 0.6, -Robot.robotContainer.getRightX() * 0.4, true); // for non carpet
-		differentialDrive.arcadeDrive(Robot.robotContainer.getLeftY() * 0.6, -Robot.robotContainer.getRightX() * 1.5, true); // for carpet
+		differentialDrive.arcadeDrive(leftY * 0.6, rightX * 1.5, true); // for carpet
 	}
 
 	public void stop() {
