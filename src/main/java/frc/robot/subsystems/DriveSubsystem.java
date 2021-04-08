@@ -139,7 +139,7 @@ public class DriveSubsystem extends SubsystemBase {
 		System.out.println("Left Power : " + frontLeftMotor.get() + "   Right Power: " + frontRightMotor.get());
 
 		//differentialDrive.arcadeDrive(Robot.robotContainer.getLeftY() * 0.6, -Robot.robotContainer.getRightX() * 0.4, true); // for non carpet
-		differentialDrive.arcadeDrive(leftY * 0.6, rightX * 1.5, true); // for carpet
+		differentialDrive.arcadeDrive(leftY * 0.6, rightX, false); // for carpet
 	}
 
 	public void stop() {
