@@ -114,16 +114,16 @@ public class RobotContainer {
 		// buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
 
 
-		buttonA.whenPressed(new RunShooterToRPMCommand(shooterSubsystem, intakeStorageSubsystem, true));
-		buttonB.whenPressed(new RunShooterToRPMCommand(shooterSubsystem, intakeStorageSubsystem, false));
+		buttonA.whenPressed(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, true));
+		buttonB.whenPressed(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, false));
 
 		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
 		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
 
 
 		// shooter power testing
-		leftBumper.whenPressed(new ChangeShooterRPMCommand(shooterSubsystem, -50));
-		rightBumper.whenPressed(new ChangeShooterRPMCommand(shooterSubsystem, 50));
+		leftBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.01));
+		rightBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.01));
 		
 
 	}

@@ -35,6 +35,7 @@ public class RunShooterToRPMCommand extends CommandBase {
 		} else {
 			shooterSubsystem.runShooterRPM(0);
 		}
+		// System.out.println("Initialized. Target")
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
