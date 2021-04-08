@@ -99,7 +99,7 @@ public class DriveSubsystem extends SubsystemBase {
 	public boolean gyroTurn(double targetAngleDeg) {
 		double error = targetAngleDeg - getHeading();
         System.out.println("error: " + error + " heading: " + getHeading());
-        double power = Math.max(Math.abs(error / 360), 0.2) * (error < 0 ? -1 : 1);
+        double power = Math.max(Math.abs(error / 360), 0.3) * (error < 0 ? -1 : 1);
         System.out.println("Power for gyro turn: " + power);
         if(Math.abs(error) >= 2.0) {
 		    powerDrive(power, power);  
@@ -122,12 +122,24 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void tankDrive(){
-		differentialDrive.tankDrive(Robot.robotContainer.getLeftY(), Robot.robotContainer.getRightY(), true) ;
+		double leftPower = Robot.robotContainer.getLeftY();
+		double rightPower = Robot.robotContainer.getRightY();
+		if(Math.abs(leftPower - rightPower) < 0.1) {
+			leftPower = (leftPower + rightPower) / 2;
+			rightPower = leftPower;
+		}
+		differentialDrive.tankDrive(leftPower * 0.6, rightPower * 0.6, false) ;
 
 	}
 
 	public void arcadeDrive() {
-		differentialDrive.arcadeDrive(Robot.robotContainer.getZ(), -Robot.robotContainer.getX());
+		double rightX = -Robot.robotContainer.getRightX();
+		double leftY = Robot.robotContainer.getLeftY();
+		System.out.println("RightX : " + rightX + "   leftY: " + leftY);
+		System.out.println("Left Power : " + frontLeftMotor.get() + "   Right Power: " + frontRightMotor.get());
+
+		//differentialDrive.arcadeDrive(Robot.robotContainer.getLeftY() * 0.6, -Robot.robotContainer.getRightX() * 0.4, true); // for non carpet
+		differentialDrive.arcadeDrive(leftY * 0.6, rightX, false); // for carpet
 	}
 
 	public void stop() {

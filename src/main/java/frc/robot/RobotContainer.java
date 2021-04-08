@@ -10,11 +10,26 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+
+
+// Commands
 import frc.robot.commands.StraightLineAuto;
 import frc.robot.commands.StraightDrive;
 import frc.robot.commands.TurnUsingGyro;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ChangeShooterPowerCommand;
+import frc.robot.commands.DisableIntake;
+import frc.robot.commands.EnableIntakeShooterCommand;
+import frc.robot.commands.RunIntakeCommand;
+import frc.robot.commands.RunShooterToPowerCommand;
+import frc.robot.commands.RunShooterToRPMCommand;
+import frc.robot.commands.ChangeShooterRPMCommand;
+
+// Subsystems
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeStorageSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,16 +40,30 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
-
 	public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+	private final IntakeStorageSubsystem intakeStorageSubsystem = new IntakeStorageSubsystem();
+
+	private final EnableIntakeShooterCommand enableIntakeShooterCommand = new EnableIntakeShooterCommand(shooterSubsystem, intakeStorageSubsystem, true); // for auto
+	private final DisableIntake disableIntakeCommand = new DisableIntake(shooterSubsystem, intakeStorageSubsystem);
 	private final Command autonomousCommand = 
-		new SequentialCommandGroup (
-			new StraightDrive(driveSubsystem, 120, 0.3),
-			new TurnUsingGyro(driveSubsystem, 90),
-			new StraightDrive(driveSubsystem, 60, 0.3)
-			// new TurnUsingGyro(driveSubsystem, 45),
-			// new StraightDrive(driveSubsystem, 36, 0.3)
+		new ParallelCommandGroup (
+			new EnableIntakeShooterCommand(shooterSubsystem, intakeStorageSubsystem, false),
+			new SequentialCommandGroup (
+				new StraightDrive(driveSubsystem, 144, 0.3),
+				new TurnUsingGyro(driveSubsystem, 90),
+				new StraightDrive(driveSubsystem, 85, 0.3),
+				new TurnUsingGyro(driveSubsystem, 45),
+				new StraightDrive(driveSubsystem, 24, 0.3)
+			)
 		);
+	
+
+		
+	
+
+
+
 	// public final ServoSubsystem servoSubsystem = new ServoSubsystem();
 
 	/**
@@ -49,6 +78,8 @@ public class RobotContainer {
 	private JoystickButton buttonB;
 	private JoystickButton buttonX;
 	private JoystickButton buttonY;
+	private JoystickButton leftBumper;
+	private JoystickButton rightBumper;
 
 	// Arcade Drive
 	private Joystick wheel;
@@ -68,18 +99,42 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		driver = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-		// Tank Drive
-		joystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
-		buttonA = new JoystickButton(driver, Constants.BUTTON_A);
-		buttonB = new JoystickButton(driver, Constants.BUTTON_B);
-		buttonX = new JoystickButton(driver, Constants.BUTTON_X);
-		buttonY = new JoystickButton(driver, Constants.BUTTON_Y);
 
-		// Arcade Drive
-		wheel = new Joystick(Constants.WHEEL_PORT);
-		throttle = new Joystick(Constants.THROTTLE_PORT);
-		buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
+		joystick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
+		buttonA = new JoystickButton(driver, Constants.BUTTON_A); // A - runs shooter wheels + intake back up
+		buttonB = new JoystickButton(driver, Constants.BUTTON_B); // B - stops shooter wheels
+		buttonX = new JoystickButton(driver, Constants.BUTTON_X); // X - runs intake system
+		buttonY = new JoystickButton(driver, Constants.BUTTON_Y); // Y - stops intake system
+		leftBumper = new JoystickButton(driver, Constants.LEFT_BUMPER); // left bumper - decreases speed/power
+		rightBumper = new JoystickButton(driver, Constants.RIGHT_BUMPER); // right bumper - increases speed/power
+
+		// // Arcade Drive
+		// wheel = new Joystick(Constants.WHEEL_PORT);
+		// throttle = new Joystick(Constants.THROTTLE_PORT);
+		// buttonPanel = new Joystick(Constants.BUTTON_PANEL_PORT);
+
+
+		buttonA.whenPressed(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, true));
+		buttonA.whenReleased(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, false));
+		buttonB.whenPressed(new RunShooterToPowerCommand(shooterSubsystem, intakeStorageSubsystem, false));
+
+		buttonX.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, true));
+		buttonY.whenPressed(new RunIntakeCommand(intakeStorageSubsystem, false));
+
+
+		// shooter power testing
+		leftBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, -0.01));
+		rightBumper.whenPressed(new ChangeShooterPowerCommand(shooterSubsystem, 0.01));
+		
+
 	}
+
+	public EnableIntakeShooterCommand getEnableIntakeShooterCommand() {
+		return enableIntakeShooterCommand;
+	}
+	
+
+
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -90,6 +145,10 @@ public class RobotContainer {
 		// An ExampleCommand will run in autonomous
 
 		return autonomousCommand; 
+	}
+
+	public Command disableIntake() {
+		return disableIntakeCommand;
 	}
 
 	// public XboxController getDriver() {
@@ -146,13 +205,5 @@ public class RobotContainer {
 
 	public double getRightY() {
 		return driver.getY(GenericHID.Hand.kRight);
-	}
-
-	public double getZ() {
-		return getThrottle().getZ();
-	}
-
-	public double getX() {
-		return getWheel().getX();
 	}
 }
