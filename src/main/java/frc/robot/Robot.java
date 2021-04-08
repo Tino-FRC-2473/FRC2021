@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
     //   enableShooterCommand.schedule();
     // }
 
-    (new TeleopArcadeDriveCommand(robotContainer.driveSubsystem)).schedule();
+    (new TeleopTankDriveCommand(robotContainer.driveSubsystem)).schedule();
   }
 
   /** This function is called periodically during operator control. */
