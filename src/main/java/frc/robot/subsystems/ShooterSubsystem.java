@@ -25,7 +25,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		leftShooterMotor = new CANSparkMax(ShooterConstants.SPARK_SHOOTER_LEFT, MotorType.kBrushless);
 		rightShooterMotor = new CANSparkMax(ShooterConstants.SPARK_SHOOTER_RIGHT, MotorType.kBrushless);
 
-		targetPower = 0.5;
+		targetPower = 0.55;
 		targetVelocity = 5900;
 		leftShooterMotor.set(0); // on init, set power to 0
 		rightShooterMotor.set(0);
