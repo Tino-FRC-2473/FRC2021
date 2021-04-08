@@ -74,5 +74,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
 	public void setTargetVelocity(double targetVelocity) {
 		this.targetVelocity = targetVelocity;
+		System.out.println("Set velocity to: " + targetVelocity);
 	}
 }

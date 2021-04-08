@@ -44,6 +44,7 @@ public class RunShooterToRPMCommand extends CommandBase {
 			intakeStorageSubsystem.runStorageMotor(0);
 			shooterSubsystem.runShooterRPM(shooterSubsystem.getTargetVelocity());
 		}
+		System.out.println("Current shooter velocity: " + shooterSubsystem.getVelocity());
 	}
 
 	// Called once the command ends or is interrupted.
